@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>オダボード</title>
+    <title>Admin - オダボード</title>
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -12,9 +12,9 @@
 
   <body>
     <header>
-      <% if end_user_signed_in? %>
+      <% if admin_signed_in? %>
         <div>
-          <%= link_to 'ログアウトする', destroy_end_user_session_path, method: :delete %>
+          <%= link_to 'ログアウトする', destroy_admin_session_path, method: :DELETE %>
         </div>
       <% end %>
     </header>
