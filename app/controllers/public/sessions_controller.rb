@@ -19,7 +19,11 @@ class Public::SessionsController < Devise::SessionsController
   #   super
   # end
 
-  # protected
+  def guest_sign_in
+    end_user = EndUser.guest
+    sign_in end_user
+    redirect_to root_path, notice: "テスト：ゲスト状態です"
+  end
 
   def after_sign_in_path_for(resource)
     root_path
@@ -28,6 +32,8 @@ class Public::SessionsController < Devise::SessionsController
   def after_sign_out_path_for(resource)
     choice_path　#ゲストログインしてroot_pathに入りたい
   end
+
+  protected
 
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: [:name])

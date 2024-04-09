@@ -16,6 +16,9 @@ Rails.application.routes.draw do
       registrations: 'public/registrations',
       sessions: 'public/sessions'
     }
+    devise_scope :end_users do
+      post 'end_users/guest_sign_in', to: 'sessions#guest_sign_in'
+    end
 
     root to: 'homes#top'
     resources :end_users, only: [:show, :edit]
