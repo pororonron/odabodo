@@ -1,2 +1,9 @@
 <h1>ログイン選択画面</h1>
 
+<div>
+  <%= link_to '新規登録', new_end_user_registration_path %>
+  <%= link_to 'ログイン', new_end_user_session_path %>
+</div>
+<div>
+  <%= link_to 'ゲストでログイン', end_users_guest_sign_in_path, method: :post %>
+</div>

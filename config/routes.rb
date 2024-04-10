@@ -16,7 +16,7 @@ Rails.application.routes.draw do
       registrations: 'public/registrations',
       sessions: 'public/sessions'
     }
-    devise_scope :end_users do
+    devise_scope :end_user do
       post 'end_users/guest_sign_in', to: 'sessions#guest_sign_in'
     end
 

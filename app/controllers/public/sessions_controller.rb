@@ -30,7 +30,7 @@ class Public::SessionsController < Devise::SessionsController
   end
 
   def after_sign_out_path_for(resource)
-    choice_path　#ゲストログインしてroot_pathに入りたい
+    choice_path
   end
 
   protected
