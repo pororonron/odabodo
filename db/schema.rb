@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_04_08_020312) do
+ActiveRecord::Schema.define(version: 2024_04_12_041112) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -67,15 +67,31 @@ ActiveRecord::Schema.define(version: 2024_04_08_020312) do
     t.index ["reset_password_token"], name: "index_end_users_on_reset_password_token", unique: true
   end
 
+  create_table "theme_tag_middles", force: :cascade do |t|
+    t.integer "theme_id", null: false
+    t.integer "theme_tag_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["theme_id"], name: "index_theme_tag_middles_on_theme_id"
+    t.index ["theme_tag_id"], name: "index_theme_tag_middles_on_theme_tag_id"
+  end
+
+  create_table "theme_tags", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "themes", force: :cascade do |t|
     t.integer "end_user_id", null: false
     t.string "title", null: false
     t.text "detail"
-    t.string "tag"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "theme_tag_middles", "theme_tags"
+  add_foreign_key "theme_tag_middles", "themes"
 end
