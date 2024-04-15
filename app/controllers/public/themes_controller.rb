@@ -1,13 +1,13 @@
 class Public::ThemesController < ApplicationController
   def new
     @theme = Theme.new
-    @theme_tag = ThemeTag.new
   end
 
   def create
-    @theme = current_end_user.themes.new(theme_params)
-    theme_tags = params[:theme][:theme_tag_id].split(',')
-    if @theme.save
+    @theme = Theme.new(theme_params)
+    theme_tags = params[:theme][:name].split(',')
+    @theme.end_user_id = current_end_user.id
+    if @theme.save!
       @theme.save_theme_tags(theme_tags)
       redirect_to theme_path(@theme.id)
     else
@@ -21,6 +21,7 @@ class Public::ThemesController < ApplicationController
 
   def show
     @theme = Theme.find(params[:id])
+    @theme_tags = @theme.theme_tags.pluck(:name)
   end
 
   def edit
@@ -30,7 +31,8 @@ class Public::ThemesController < ApplicationController
 
   def update
     @theme = Theme.find(params[:id])
-    theme_tags = params[:theme][:theme_tag_id].split(',')
+    theme_tags = params[:theme][:name].split(',')
+    @theme.end_user_id = current_end_user.id
     if @theme.update(theme_params)
       @theme.update_theme_tags(theme_tags)
       redirect_to theme_path(@theme.id)
@@ -40,6 +42,12 @@ class Public::ThemesController < ApplicationController
   end
 
   def confirm
+  end
+
+  def delete
+    theme = Theme.find(params[:id])
+    theme.destroy
+    redirect_to root_path
   end
 
   private

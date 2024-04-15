@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  namespace :public do
+    get 'theme_tags/new'
+    get 'theme_tags/edit'
+  end
+  get 'theme_tags/new'
+  get 'theme_tags/edit'
   devise_for :admin, skip: [:registrations, :passwords], controllers: {
     sessions: 'admin/sessions'
   }

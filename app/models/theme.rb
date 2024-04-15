@@ -15,25 +15,14 @@ class Theme < ApplicationRecord
     end
     reference_image.variant(resize_to_limit: [width, height]).processed
   end
-  
+
   def save_theme_tags(theme_tags)
     theme_tags.each do |new_theme_tag|
       self.theme_tags.find_or_create_by(name: new_theme_tag)
     end
   end
-  
+
   def update_theme_tags(theme_tags)
-    if self.theme_tags.empty?
-      latest_theme_tags.each do |latest_theme_tag|
-        self.theme_tags.find_or_create_by(name: latest_theme_tag)
-      end
-    elsif latest_theme_tags.empty?
-      self.theme_tags.each do |theme_tag|
-        self.theme_tags.delete(theme_tag)
-      end
-    else
-      current_theme_tags = self.theme_tags.pluck(:name)
-      
-    end
+    registered_theme_tags = theme_tags.pluck(:name)
   end
 end

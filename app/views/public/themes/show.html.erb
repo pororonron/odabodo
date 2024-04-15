@@ -1,2 +1,18 @@
-<h1>Public::Themes#show</h1>
-<p>Find me in app/views/public/themes/show.html.erb</p>
+<div>
+  <%= image_tag @theme.end_user.get_profile_image(100, 100) %>
+  <%= link_to end_user_path(@theme.end_user_id) do %>
+    <%= @theme.end_user.name %>さん
+  <% end %>
+
+  <% if @theme.end_user_id == current_end_user.id %>
+    <%= link_to 'お題内容を編集する', edit_theme_path(@theme), class: "btn btn-sm btn-success" %>
+  <% end %>
+</div>
+<div>
+  <p>お題：<strong><%= @theme.title %></strong></p>
+  <% @theme_tags.each do |tag| %>
+    #<%= tag %>
+  <% end %>
+  <p><%= @theme.detail %></p>
+  <p><%= @theme.created_at %></p>
+</div>
