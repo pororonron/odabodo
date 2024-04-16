@@ -10,8 +10,8 @@
 </div>
 <div>
   <p>お題：<strong><%= @theme.title %></strong></p>
-  <% @theme_tags.each do |tag| %>
-    #<%= tag %>
+  <% @theme_tags.each do |theme_tag| %>
+    #<%= theme_tag %>
   <% end %>
   <p><%= @theme.detail %></p>
   <p><%= @theme.created_at %></p>

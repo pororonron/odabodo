@@ -22,7 +22,26 @@ class Theme < ApplicationRecord
     end
   end
 
-  def update_theme_tags(theme_tags)
-    registered_theme_tags = theme_tags.pluck(:name)
+  def update_theme_tags(latest_theme_tags)
+    if self.theme_tags.empty?
+      latest_theme_tags.each do |latest_theme_tag|
+        self.theme_tags.find_or_create_by(name: latest_theme_tag)
+      end
+    elsif latest_theme_tags.empty?
+      self.theme_tags.each do |theme_tag|
+        self.theme_tags.delete(theme_tag)
+      end
+    else
+      current_theme_tags = self.theme_tags.pluck(:name)
+      old_theme_tags = current_theme_tags - latest_theme_tags
+      new_theme_tags = latest_theme_tags - current_theme_tags
+      old_theme_tags.each do |old_theme_tag|
+        theme_tag = self.theme_tags.find_by(name: old_theme_tag)
+        self.theme_tags.delete(theme_tag) if theme_tag.present?
+      end
+      new_theme_tags.each do |new_theme_tag|
+        self.theme_tags.find_or_create_by(name: new_theme_tag)
+      end
+    end
   end
 end

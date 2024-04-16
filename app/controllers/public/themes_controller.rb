@@ -31,6 +31,7 @@ class Public::ThemesController < ApplicationController
 
   def update
     @theme = Theme.find(params[:id])
+    @theme_tags = @theme.theme_tags.pluck(:name).join(',')
     theme_tags = params[:theme][:name].split(',')
     @theme.end_user_id = current_end_user.id
     if @theme.update(theme_params)
