@@ -27,7 +27,7 @@ Rails.application.routes.draw do
     end
 
     root to: 'homes#top'
-    resources :end_users, only: [:show, :edit]
+    resources :end_users, only: [:show, :edit, :update]
     resources :themes
     get 'choice' => 'homes#choice', as: 'choice'
     get 'end_users/confirm' => 'end_users#confirm', as: 'end_user_confirm'

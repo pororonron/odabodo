@@ -14,5 +14,11 @@
     #<%= theme_tag %>
   <% end %>
   <p><%= @theme.detail %></p>
+  <% if @theme.reference_images.attached? %>
+    <p>参照画像</p>
+    <% @theme.reference_images.each do |reference_image| %>
+      <%= image_tag reference_image.variant(resize: '250x250').processed %>
+    <% end %>
+  <% end %>
   <p><%= @theme.created_at %></p>
 </div>

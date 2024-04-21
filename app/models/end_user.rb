@@ -5,6 +5,10 @@ class EndUser < ApplicationRecord
          :recoverable, :rememberable, :validatable
   has_one_attached :profile_image
   has_many :themes, dependent: :destroy
+  validates :name, presence: true,
+    length: { maximum: 30 }
+  validates :self_introduction,
+    length: { maximum: 1000 }
   GUEST_END_USER_EMAIL = "guest@example.com"
 
   def self.guest
