@@ -7,8 +7,7 @@
   <% if @theme.end_user_id == current_end_user.id %>
     <%= link_to 'お題内容を編集する', edit_theme_path(@theme), class: "btn btn-sm btn-success" %>
   <% end %>
-</div>
-<div>
+
   <p>お題：<strong><%= @theme.title %></strong></p>
   <% @theme_tags.each do |theme_tag| %>
     #<%= theme_tag %>
@@ -17,8 +16,34 @@
   <% if @theme.reference_images.attached? %>
     <p>参照画像</p>
     <% @theme.reference_images.each do |reference_image| %>
-      <%= image_tag reference_image.variant(resize: '250x250').processed %>
+      <%= link_to image_tag(reference_image.variant(resize: '250x250').processed), url_for(reference_image.variant(resize: '500x500').processed) %>
     <% end %>
   <% end %>
   <p><%= @theme.created_at %></p>
+  <% if @theme.theme_challenged_by?(current_end_user) %>
+    <p>
+      <%= link_to 'このお題に挑戦中です！', theme_challenge_theme_path(@theme), method: :delete, class: "btn btn-sm btn-secondary" %>
+    </p>
+  <% else %>
+    <p>
+      <%= link_to 'このお題に挑戦する！', theme_challenge_theme_path(@theme), method: :post, class: "btn btn-sm btn-success" %>
+    </p>
+  <% end %>
+
+  <div>
+    <%= form_with model: [@theme, @theme_comment], local: true do |f| %>
+      <%= f.text_area :comment, rows: '5', placeholder: 'コメントをここに' %>
+      <%= f.submit '送信' %>
+    <% end %>
+
+    <% @theme.theme_comments.each do |theme_comment| %>
+      <%= image_tag theme_comment.end_user.get_profile_image(50, 50) %>
+      <%= theme_comment.end_user.name %> さん
+      <%= theme_comment.comment %>
+      <%= theme_comment.created_at %>
+      <% if theme_comment.end_user == current_end_user %>
+        <%= link_to '削除', theme_theme_comment_path(theme_comment.theme, theme_comment), method: :delete, class: "btn btn-sm btn-secondary" %>
+      <% end %>
+    <% end %>
+  </div>
 </div>

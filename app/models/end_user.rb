@@ -5,6 +5,8 @@ class EndUser < ApplicationRecord
          :recoverable, :rememberable, :validatable
   has_one_attached :profile_image
   has_many :themes, dependent: :destroy
+  has_many :challenge_themes, dependent: :destroy
+  has_many :theme_comments, dependent: :destroy
   validates :name, presence: true,
     length: { maximum: 30 }
   validates :self_introduction,

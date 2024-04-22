@@ -4,7 +4,7 @@ class Public::ThemesController < ApplicationController
   end
 
   def create
-    @theme = current_end_user.themes.new(theme_params)
+    @theme = current_end_user.themes.new(reference_images_resize(theme_params))
     if @theme.save
       redirect_to theme_path(@theme)
     else
@@ -19,6 +19,7 @@ class Public::ThemesController < ApplicationController
   def show
     @theme = Theme.find(params[:id])
     @theme_tags = @theme.theme_tags.pluck(:name)
+    @theme_comment = ThemeComment.new
   end
 
   def edit
@@ -26,9 +27,15 @@ class Public::ThemesController < ApplicationController
   end
 
   def update
-    @theme = Theme.find(params[:id])
-    @theme.end_user_id = current_end_user.id
-    if @theme.update(theme_params)
+    @theme = current_end_user.themes.find(params[:id])
+    if params[:theme][:reference_image_ids]
+      params[:theme][:reference_image_ids].each do |reference_image_id|
+        reference_image = @theme.reference_images.find(reference_image_id)
+        reference_image.purge
+      end
+    end
+
+    if @theme.update(reference_images_resize(theme_params))
       redirect_to theme_path(@theme.id)
     else
       render :edit
@@ -43,6 +50,16 @@ class Public::ThemesController < ApplicationController
     theme.destroy
     redirect_to root_path
   end
+
+  def reference_images_resize(params)
+    if params[:reference_images]
+      params[:reference_images].each do |reference_image|
+        reference_image.tempfile = ImageProcessing::MiniMagick.source(reference_image.path).resize_to_limit(500, 500).call
+      end
+    end
+    params
+  end
+
 
   private
 

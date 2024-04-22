@@ -3,6 +3,8 @@ class Theme < ApplicationRecord
   belongs_to :end_user
   has_many :theme_tag_middles, dependent: :destroy
   has_many :theme_tags, through: :theme_tag_middles
+  has_many :challenge_themes, dependent: :destroy
+  has_many :theme_comments, dependent: :destroy
   validates :title, presence: true,
     length: { maximum: 30 }
   validates :detail,
@@ -14,14 +16,6 @@ class Theme < ApplicationRecord
 
   after_create :save_theme_tags
   after_update :update_theme_tags
-
-  def get_reference_images(width, height)
-    unless reference_images.attached?
-      file_path = Rails.root.join('app/assets/images/no_image.jpg')
-      reference_images.attach(io: File.open(file_path), filename: 'no-image.jpg', content_type: 'image/jpeg')
-    end
-    reference_images.variant(resize_to_limit: [width, height]).processed
-  end
 
   def save_theme_tags
     theme_tag_names = @theme_tag_name.split(',')
@@ -37,6 +31,10 @@ class Theme < ApplicationRecord
 
   def theme_tag_name
     theme_tags.pluck(:name).join(",")
+  end
+
+  def theme_challenged_by?(end_user)
+    challenge_themes.exists?(end_user_id: end_user.id)
   end
 
   private

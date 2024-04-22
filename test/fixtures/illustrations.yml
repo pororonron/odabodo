@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  end_user: one
+  theme: one
+  challenge_theme: one
+  title: MyString
+  detail: MyText
+
+two:
+  end_user: two
+  theme: two
+  challenge_theme: two
+  title: MyString
+  detail: MyText

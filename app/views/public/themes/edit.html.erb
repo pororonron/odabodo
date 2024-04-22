@@ -25,7 +25,7 @@
             <div style="display: flex; margin:5px 5px 0;">
               <%= f.check_box :reference_image_ids, { multiple: true }, reference_image.id, false %>
               <label for="theme_reference_image_ids_<%= reference_image.id %>">
-                <%= image_tag reference_image, size: '300x200' %>
+                <%= image_tag reference_image.variant(resize: '250x250').processed %>
               </label>
             </div>
           <% end %>
