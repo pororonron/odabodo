@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_04_22_025810) do
+ActiveRecord::Schema.define(version: 2024_04_23_145635) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -76,6 +76,21 @@ ActiveRecord::Schema.define(version: 2024_04_22_025810) do
     t.index ["reset_password_token"], name: "index_end_users_on_reset_password_token", unique: true
   end
 
+  create_table "illustration_tag_middles", force: :cascade do |t|
+    t.integer "illustration_id", null: false
+    t.integer "illustration_tag_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["illustration_id"], name: "index_illustration_tag_middles_on_illustration_id"
+    t.index ["illustration_tag_id"], name: "index_illustration_tag_middles_on_illustration_tag_id"
+  end
+
+  create_table "illustration_tags", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "illustrations", force: :cascade do |t|
     t.integer "end_user_id", null: false
     t.integer "theme_id", null: false
@@ -126,6 +141,8 @@ ActiveRecord::Schema.define(version: 2024_04_22_025810) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "challenge_themes", "end_users"
   add_foreign_key "challenge_themes", "themes"
+  add_foreign_key "illustration_tag_middles", "illustration_tags"
+  add_foreign_key "illustration_tag_middles", "illustrations"
   add_foreign_key "illustrations", "challenge_themes"
   add_foreign_key "illustrations", "end_users"
   add_foreign_key "illustrations", "themes"

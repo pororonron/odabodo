@@ -5,6 +5,7 @@ class Theme < ApplicationRecord
   has_many :theme_tags, through: :theme_tag_middles
   has_many :challenge_themes, dependent: :destroy
   has_many :theme_comments, dependent: :destroy
+  has_many :illustrations, dependent: :destroy
   validates :title, presence: true,
     length: { maximum: 30 }
   validates :detail,

@@ -1,10 +1,4 @@
 Rails.application.routes.draw do
-  namespace :public do
-    get 'theme_tags/new'
-    get 'theme_tags/edit'
-  end
-  get 'theme_tags/new'
-  get 'theme_tags/edit'
   devise_for :admin, skip: [:registrations, :passwords], controllers: {
     sessions: 'admin/sessions'
   }
@@ -35,6 +29,7 @@ Rails.application.routes.draw do
       resource :challenge_theme, only: [:create, :destroy]
       resources :theme_comments, only: [:create, :destroy]
     end
+    resources :illustrations
     get 'choice' => 'homes#choice', as: 'choice'
     get 'end_users/confirm' => 'end_users#confirm', as: 'end_user_confirm'
     get 'themes/confirm' => 'themes#confirm', as: 'theme_confirm'
