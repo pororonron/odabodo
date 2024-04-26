@@ -8,6 +8,7 @@ class EndUser < ApplicationRecord
   has_many :challenge_themes, dependent: :destroy
   has_many :theme_comments, dependent: :destroy
   has_many :illustrations, dependent: :destroy
+  has_many :illustration_comments, dependent: :destroy
   validates :name, presence: true,
     length: { maximum: 30 }
   validates :self_introduction,

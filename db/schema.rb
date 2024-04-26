@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_04_23_145635) do
+ActiveRecord::Schema.define(version: 2024_04_26_025624) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -76,6 +76,16 @@ ActiveRecord::Schema.define(version: 2024_04_23_145635) do
     t.index ["reset_password_token"], name: "index_end_users_on_reset_password_token", unique: true
   end
 
+  create_table "illustration_comments", force: :cascade do |t|
+    t.integer "end_user_id", null: false
+    t.integer "illustration_id", null: false
+    t.text "comment", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["end_user_id"], name: "index_illustration_comments_on_end_user_id"
+    t.index ["illustration_id"], name: "index_illustration_comments_on_illustration_id"
+  end
+
   create_table "illustration_tag_middles", force: :cascade do |t|
     t.integer "illustration_id", null: false
     t.integer "illustration_tag_id", null: false
@@ -94,12 +104,10 @@ ActiveRecord::Schema.define(version: 2024_04_23_145635) do
   create_table "illustrations", force: :cascade do |t|
     t.integer "end_user_id", null: false
     t.integer "theme_id", null: false
-    t.integer "challenge_theme_id", null: false
     t.string "title", default: "無題", null: false
     t.text "detail"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["challenge_theme_id"], name: "index_illustrations_on_challenge_theme_id"
     t.index ["end_user_id"], name: "index_illustrations_on_end_user_id"
     t.index ["theme_id"], name: "index_illustrations_on_theme_id"
   end
@@ -107,7 +115,7 @@ ActiveRecord::Schema.define(version: 2024_04_23_145635) do
   create_table "theme_comments", force: :cascade do |t|
     t.integer "end_user_id", null: false
     t.integer "theme_id", null: false
-    t.text "comment"
+    t.text "comment", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["end_user_id"], name: "index_theme_comments_on_end_user_id"
@@ -141,9 +149,10 @@ ActiveRecord::Schema.define(version: 2024_04_23_145635) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "challenge_themes", "end_users"
   add_foreign_key "challenge_themes", "themes"
+  add_foreign_key "illustration_comments", "end_users"
+  add_foreign_key "illustration_comments", "illustrations"
   add_foreign_key "illustration_tag_middles", "illustration_tags"
   add_foreign_key "illustration_tag_middles", "illustrations"
-  add_foreign_key "illustrations", "challenge_themes"
   add_foreign_key "illustrations", "end_users"
   add_foreign_key "illustrations", "themes"
   add_foreign_key "theme_comments", "end_users"

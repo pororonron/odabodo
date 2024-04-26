@@ -23,13 +23,13 @@ Rails.application.routes.draw do
     root to: 'homes#top'
     resources :end_users, only: [:show, :edit, :update]
     resources :themes do
-      member do
-        get :challenge_themes
-      end
+      get :challenge_themes, on: :member
       resource :challenge_theme, only: [:create, :destroy]
       resources :theme_comments, only: [:create, :destroy]
     end
-    resources :illustrations
+    resources :illustrations do
+      resources :illustration_comments, only: [:create, :destroy]
+    end
     get 'choice' => 'homes#choice', as: 'choice'
     get 'end_users/confirm' => 'end_users#confirm', as: 'end_user_confirm'
     get 'themes/confirm' => 'themes#confirm', as: 'theme_confirm'
