@@ -1,2 +1,21 @@
-<h1>Public::Homes#top</h1>
-<p>Find me in app/views/public/homes/top.html.erb</p>
+<ul class="nav nav-tabs">
+  <li class="nav-item">
+    <button class="nav-link" data-toggle="tab" data-target="#tabTheme" type="button">
+      お題
+    </button>
+  </li>
+  <li class="nav-item">
+    <button class="nav-link active" data-toggle="tab" data-target="#tabIllustration" type="button">
+      イラスト
+    </button>
+  </li>
+</ul>
+
+<div class="tab-content">
+  <div id="tabTheme" class="tab-pane">
+    <%= render "public/themes/index" %>
+  </div>
+  <div id="tabIllustration" class="tab-pane active">
+    <%= render "public/illustrations/index" %>
+  </div>
+</div>
