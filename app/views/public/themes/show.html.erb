@@ -20,6 +20,7 @@
     <% end %>
   <% end %>
   <p><%= @theme.created_at %></p>
+  
   <% if @theme.theme_challenged_by?(current_end_user) %>
     <p>
       <%= link_to 'このお題に挑戦中です！', theme_challenge_theme_path(@theme), method: :delete, class: "btn btn-sm btn-secondary" %>

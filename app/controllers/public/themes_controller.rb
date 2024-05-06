@@ -14,6 +14,7 @@ class Public::ThemesController < ApplicationController
 
   def index
     @themes = Theme.all
+    @illustrations = Illustration.all
   end
 
   def show
@@ -42,10 +43,7 @@ class Public::ThemesController < ApplicationController
     end
   end
 
-  def confirm
-  end
-
-  def delete
+  def destroy
     theme = Theme.find(params[:id])
     theme.destroy
     redirect_to root_path

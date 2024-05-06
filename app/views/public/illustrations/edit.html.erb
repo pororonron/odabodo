@@ -38,5 +38,6 @@
       <%= f.text_field :illustration_tag_name, id: "inputIllustrationTag", class: "form-control" %>
     </div>
     <%= f.submit '投稿する', class: "btn btn-success my-3" %>
+    <%= link_to '削除する', illustration_path, method: :delete, "data-confirm" => "本当に削除しますか？" %>
   <% end %>
 </div>

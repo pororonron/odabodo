@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_04_26_025624) do
+ActiveRecord::Schema.define(version: 2024_05_06_021720) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -52,6 +52,15 @@ ActiveRecord::Schema.define(version: 2024_04_26_025624) do
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
   end
 
+  create_table "bookmarks", force: :cascade do |t|
+    t.integer "end_user_id", null: false
+    t.integer "illustration_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["end_user_id"], name: "index_bookmarks_on_end_user_id"
+    t.index ["illustration_id"], name: "index_bookmarks_on_illustration_id"
+  end
+
   create_table "challenge_themes", force: :cascade do |t|
     t.integer "end_user_id", null: false
     t.integer "theme_id", null: false
@@ -74,6 +83,15 @@ ActiveRecord::Schema.define(version: 2024_04_26_025624) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["email"], name: "index_end_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_end_users_on_reset_password_token", unique: true
+  end
+
+  create_table "favorites", force: :cascade do |t|
+    t.integer "end_user_id", null: false
+    t.integer "illustration_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["end_user_id"], name: "index_favorites_on_end_user_id"
+    t.index ["illustration_id"], name: "index_favorites_on_illustration_id"
   end
 
   create_table "illustration_comments", force: :cascade do |t|
@@ -139,7 +157,7 @@ ActiveRecord::Schema.define(version: 2024_04_26_025624) do
 
   create_table "themes", force: :cascade do |t|
     t.integer "end_user_id", null: false
-    t.string "title", null: false
+    t.string "title", default: "無題", null: false
     t.text "detail"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -147,8 +165,12 @@ ActiveRecord::Schema.define(version: 2024_04_26_025624) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "bookmarks", "end_users"
+  add_foreign_key "bookmarks", "illustrations"
   add_foreign_key "challenge_themes", "end_users"
   add_foreign_key "challenge_themes", "themes"
+  add_foreign_key "favorites", "end_users"
+  add_foreign_key "favorites", "illustrations"
   add_foreign_key "illustration_comments", "end_users"
   add_foreign_key "illustration_comments", "illustrations"
   add_foreign_key "illustration_tag_middles", "illustration_tags"

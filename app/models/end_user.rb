@@ -9,6 +9,8 @@ class EndUser < ApplicationRecord
   has_many :theme_comments, dependent: :destroy
   has_many :illustrations, dependent: :destroy
   has_many :illustration_comments, dependent: :destroy
+  has_many :favorites, dependent: :destroy
+  has_many :bookmarks, dependent: :destroy
   validates :name, presence: true,
     length: { maximum: 30 }
   validates :self_introduction,

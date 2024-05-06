@@ -33,8 +33,7 @@
       <% end %>
     </div>
     <%= f.submit '更新する', class: "btn btn-success my-3" %>
-    <% if @theme.end_user_id == current_end_user.id? %>
-      <%= link_to '削除する', choice_path, class: "btn btn-secondary my-3" %>
-    <% end %>
+    <%= link_to '削除する', theme_path, method: :delete, "data-confirm" => "本当に削除しますか？
+    \n現在挑戦されている方がいるかもしれません。" %>
   <% end %>
 </div>

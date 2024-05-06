@@ -17,6 +17,7 @@ class Public::IllustrationsController < ApplicationController
 
   def index
     @illustrations = Illustration.all
+    @themes = Theme.all
   end
 
   def show
@@ -45,6 +46,12 @@ class Public::IllustrationsController < ApplicationController
     else
       render :edit
     end
+  end
+
+  def destroy
+    illustration = Illustration.find(params[:id])
+    illustration.destroy
+    redirect_to root_path
   end
 
   # def challenged_images_resize(params)

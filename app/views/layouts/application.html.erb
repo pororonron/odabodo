@@ -6,15 +6,29 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+    <script src="https://kit.fontawesome.com/a8ee063013.js" crossorigin="anonymous"></script>
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'style', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
     <header>
       <% if end_user_signed_in? %>
         <div>
-          <%= link_to 'ログアウトする', destroy_end_user_session_path, method: :delete %>
+          <div>
+            <a href="/#top.html?no=tab1"><<<<<<<<<<<<お題 | </a>
+            <a href="/#top.html?no=tab2">イラスト</a>
+            <!--<a href="/#tab_panel-0"><<<<<<<<<<<<お題</a>-->
+          </div>
+
+          <div class="search_form">
+            <%= form_with url: searches_path, local: true do |f| %>
+              <%= f.text_field :word %>
+              <%= f.submit "検索する", class: "btn btn-primary" %>
+            <% end %>
+          </div>
+          <%= link_to 'ログアウト', destroy_end_user_session_path, method: :delete %>
         </div>
       <% end %>
     </header>
@@ -22,5 +36,7 @@
       <%= notice %>
       <%= yield %>
     </main>
+    <!--<script src="%= asset_path('jquery.min.js') %>"></script>-->
+    <!--<script src="%= asset_path('style.js') %>"></script>-->
   </body>
 </html>

@@ -22,6 +22,38 @@
   <% end %>
   <p><%= @illustration.detail %></p>
 
+  <% if @illustration.favorited_by?(current_end_user) %>
+    <p>
+      <%= link_to illustration_favorite_path(@illustration), method: :delete do %>
+        <i class="fa-solid fa-heart"></i>
+        <%= @illustration.favorites.count %>
+      <% end %>
+    </p>
+  <% else %>
+    <p>
+      <%= link_to illustration_favorite_path(@illustration), method: :post do %>
+        <i class="fa-regular fa-heart"></i>
+        <%= @illustration.favorites.count %>
+      <% end %>
+    </p>
+  <% end %>
+
+  <% if @illustration.bookmarked_by?(current_end_user) %>
+    <p>
+      <%= link_to illustration_bookmark_path(@illustration), method: :delete do %>
+        <i class="fa-solid fa-bookmark"></i>
+        <%= @illustration.bookmarks.count %>
+      <% end %>
+    </p>
+  <% else %>
+    <p>
+      <%= link_to illustration_bookmark_path(@illustration), method: :post do %>
+        <i class="fa-regular fa-bookmark"></i>
+        <%= @illustration.bookmarks.count %>
+      <% end %>
+    </p>
+  <% end %>
+
   <div>
     <%= form_with model: [@illustration, @illustration_comment], local: true do |f| %>
       <%= f.text_area :comment, rows: '3', placeholder: 'コメントをここに' %>

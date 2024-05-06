@@ -6,14 +6,14 @@ class Public::ThemeCommentsController < ApplicationController
     theme_comment.save
     redirect_to theme_path(theme)
   end
-  
+
   def destroy
-    ThemeComment.find(params[:theme_id]).destroy
+    ThemeComment.find(params[:id]).destroy
     redirect_to theme_path(params[:theme_id])
   end
-  
+
   private
-  
+
   def theme_comment_params
     params.require(:theme_comment).permit(:comment)
   end

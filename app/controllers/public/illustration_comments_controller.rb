@@ -8,7 +8,7 @@ class Public::IllustrationCommentsController < ApplicationController
   end
 
   def destroy
-    IllustrationComment.find(params[:illustration_id]).destroy
+    IllustrationComment.find(params[:id]).destroy
     redirect_to illustration_path(params[:illustration_id])
   end
 

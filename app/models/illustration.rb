@@ -5,6 +5,8 @@ class Illustration < ApplicationRecord
   has_many :illustration_tag_middles, dependent: :destroy
   has_many :illustration_tags, through: :illustration_tag_middles
   has_many :illustration_comments, dependent: :destroy
+  has_many :favorites, dependent: :destroy
+  has_many :bookmarks, dependent: :destroy
   validates :title, presence: true,
     length: { maximum: 30 }
   validates :detail,
@@ -34,6 +36,13 @@ class Illustration < ApplicationRecord
     illustration_tags.pluck(:name).join(",")
   end
 
+  def favorited_by?(end_user)
+    favorites.exists?(end_user_id: end_user.id)
+  end
+
+  def bookmarked_by?(end_user)
+    bookmarks.exists?(end_user_id: end_user.id)
+  end
 
   private
 
@@ -41,5 +50,9 @@ class Illustration < ApplicationRecord
     if @illustration_tag_name.blank?
       errors.add(:illustration_tag_name, "タグは必須です")
     end
+  end
+  
+  def self.looks(word)
+    @illustration = Illustration.where("title LIKE?", "#{word}")
   end
 end

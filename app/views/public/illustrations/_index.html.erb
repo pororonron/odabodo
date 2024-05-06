@@ -1,2 +1,9 @@
-<h1>Public::Illustrations#index</h1>
-<p>Find me in app/views/public/illustrations/index.html.erb</p>
+<% illustrations.each do |illustration| %>
+  <div>
+    <%= link_to illustration_path(illustration.id) do %>
+      <%= image_tag illustration.challenged_images[0].variant(resize: '250x250').processed %>
+      <%= illustration.title %>
+      <%= illustration.end_user.name %>
+    <% end %>
+  </div>
+<% end %>

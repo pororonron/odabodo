@@ -28,11 +28,19 @@ Rails.application.routes.draw do
       resources :theme_comments, only: [:create, :destroy]
     end
     resources :illustrations do
+      member do
+        get :favorites
+        get :bookmarks
+      end
+      resource :favorite, only: [:create, :destroy]
+      resource :bookmark, only: [:create, :destroy]
       resources :illustration_comments, only: [:create, :destroy]
     end
     get 'choice' => 'homes#choice', as: 'choice'
     get 'end_users/confirm' => 'end_users#confirm', as: 'end_user_confirm'
     get 'themes/confirm' => 'themes#confirm', as: 'theme_confirm'
+    resources :searches, only: [:create, :index]
+    get 'search' => 'searches#search'
 
   end
 
