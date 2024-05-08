@@ -1,13 +1,13 @@
 class Public::IllustrationsController < ApplicationController
   def new
     @illustration = Illustration.new
-    @select_themes = current_end_user.challenge_themes.theme.map { |theme_id| Theme.find(theme_id) }
   end
 
   def create
     @illustration = current_end_user.illustrations.new(illustration_params)
+    # @select_themes = current_end_user.challenge_themes.theme.map { |theme_id| Theme.find(theme_id) }
     # @illustration = current_end_user.illustrations.new(challenged_images_resize(illustration_params))
-    @select_themes = current_end_user.challenge_themes.theme.map { |theme_id| Theme.find(theme_id) }
+
     if @illustration.save
       redirect_to illustration_path(@illustration)
     else

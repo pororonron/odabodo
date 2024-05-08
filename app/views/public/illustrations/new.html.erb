@@ -8,8 +8,8 @@
   <%= form_with model: @illustration, local: true do |f| %>
     <div>
       <label for="SelectTheme", class="mb-3">お題選択</label>
-      <%= f.select :theme_id, options_from_collection_for_select(@select_themes, :id, :title),
-        { include_blank: "挑戦中のお題から選択" }, id: "SelectTheme", class: "form-control" %>
+      <%= f.collection_select :theme_id, current_end_user.challenge_themes.theme.map { |theme_id| Theme.find(theme_id) },
+        :id, :title, include_blank: "挑戦中のお題から選択", id: "SelectTheme", class: "form-control" %>
     </div>
     <div class="mt-3">
       <p>画像選択</p>

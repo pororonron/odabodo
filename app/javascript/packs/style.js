@@ -22,7 +22,6 @@ $(function() {
 });
 
 function tabtest() {
-  debugger
   var url = location.href;
   url = (url.match(/\?no=tab\d+$/) || [])[0];
   var params = url.split("?");

@@ -45,7 +45,7 @@ class Theme < ApplicationRecord
       errors.add(:theme_tag_name, "タグは必須です")
     end
   end
-  
+
   def self.looks(word)
     @theme = Theme.where("title LIKE?", "#{word}")
   end

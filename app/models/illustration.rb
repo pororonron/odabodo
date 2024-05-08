@@ -2,6 +2,7 @@ class Illustration < ApplicationRecord
   has_many_attached :challenged_images
   belongs_to :end_user
   belongs_to :theme
+
   has_many :illustration_tag_middles, dependent: :destroy
   has_many :illustration_tags, through: :illustration_tag_middles
   has_many :illustration_comments, dependent: :destroy
@@ -51,7 +52,7 @@ class Illustration < ApplicationRecord
       errors.add(:illustration_tag_name, "タグは必須です")
     end
   end
-  
+
   def self.looks(word)
     @illustration = Illustration.where("title LIKE?", "#{word}")
   end
