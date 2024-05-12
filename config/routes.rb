@@ -21,7 +21,6 @@ Rails.application.routes.draw do
     end
 
     root to: 'homes#top'
-    resources :end_users, only: [:show, :edit, :update]
     resources :themes do
       get :challenge_themes, on: :member
       resource :challenge_theme, only: [:create, :destroy]
@@ -37,7 +36,11 @@ Rails.application.routes.draw do
       resources :illustration_comments, only: [:create, :destroy]
     end
     get 'choice' => 'homes#choice', as: 'choice'
+    get 'end_users/information/edit' => 'end_users#edit', as: 'edit_end_user'
+    get 'end_users/information/:id' => 'end_users#show', as: 'end_user'
+    patch 'end_users/information/:id' => 'end_users#update'
     get 'end_users/confirm' => 'end_users#confirm', as: 'end_user_confirm'
+    patch 'end_users/withdraw' => 'end_users#withdraw', as: 'withdraw'
     get 'themes/confirm' => 'themes#confirm', as: 'theme_confirm'
     resources :searches, only: [:create, :index]
     get 'search' => 'searches#search'

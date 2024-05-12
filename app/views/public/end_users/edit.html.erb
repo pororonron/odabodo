@@ -7,5 +7,7 @@
   <label for="inputSelfIntroduction">自己紹介文</label>
   <%= f.text_area :self_introduction, id: "inputSelfIntroduction", placeholder: "自己紹介文を入力してください" %>
 
-  <%= f.submit "変更を保存する" %>
+  <p><%= f.submit "変更を保存する", class: "btn btn-success" %></p>
 <% end %>
+<p><%= link_to "キャンセル", end_user_path(@end_user), class: "btn btn-secondary" %></p>
+<p><%= link_to "退会する", end_user_confirm_path %></p>

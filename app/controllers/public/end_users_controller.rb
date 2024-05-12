@@ -15,7 +15,7 @@ class Public::EndUsersController < ApplicationController
   end
 
   def edit
-    @end_user = EndUser.find(params[:id])
+    @end_user = current_end_user
   end
 
   def update
@@ -30,9 +30,16 @@ class Public::EndUsersController < ApplicationController
   def confirm
   end
 
+  def withdraw
+    current_end_user.update(is_active: false)
+    reset_session
+    flash[:notice] = "退会処理を実行いたしました。"
+    redirect_to choice_path
+  end
+
   private
 
   def end_user_params
-    params.require(:end_user).permit(:name, :self_introduction, :profile_image)
+    params.require(:end_user).permit(:name, :self_introduction, :profile_image, :is_active)
   end
 end

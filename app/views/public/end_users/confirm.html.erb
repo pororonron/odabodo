@@ -1,2 +1,6 @@
-<h1>Public::EndUsers#confirm</h1>
-<p>Find me in app/views/public/end_users/confirm.html.erb</p>
+<h1>本当に退会しますか？</h1>
+<p>退会すると、登録情報やこれまでの投稿履歴が閲覧できなくなります。</p>
+<p>退会する場合は、「退会する」をクリックしてください。</p>
+
+<%= link_to "退会をしない", end_user_path(current_end_user), class: "btn btn-success" %>
+<%= link_to "退会する", withdraw_path, method: :patch, class: "btn btn-danger", "data-confirm" => "本当に削除しますか？" %>
