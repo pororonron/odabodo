@@ -1,6 +1,6 @@
 <div>
   <%= image_tag @theme.end_user.get_profile_image(100, 100) %>
-  <%= link_to end_user_path(@theme.end_user_id) do %>
+  <%= link_to end_user_path(@theme.end_user) do %>
     <%= @theme.end_user.name %>さん
   <% end %>
 
@@ -20,7 +20,7 @@
     <% end %>
   <% end %>
   <p><%= @theme.created_at %></p>
-  
+
   <% if @theme.theme_challenged_by?(current_end_user) %>
     <p>
       <%= link_to 'このお題に挑戦中です！', theme_challenge_theme_path(@theme), method: :delete, class: "btn btn-sm btn-secondary" %>

@@ -9,5 +9,5 @@
 
   <p><%= f.submit "変更を保存する", class: "btn btn-success" %></p>
 <% end %>
-<p><%= link_to "キャンセル", end_user_path(@end_user), class: "btn btn-secondary" %></p>
-<p><%= link_to "退会する", end_user_confirm_path %></p>
+<p><%= link_to "キャンセル", end_user_path(current_end_user), class: "btn btn-secondary" %></p>
+<p><%= link_to "退会する", confirm_end_users_path %></p>

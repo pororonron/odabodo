@@ -64,4 +64,11 @@ class Public::ThemesController < ApplicationController
   def theme_params
     params.require(:theme).permit(:title, :detail, :theme_tag_name, reference_images: [])
   end
+
+  def is_matching_login_end_user
+    theme = Theme.find(params[:id])
+    unless theme.end_user_id == current_end_user.id
+      redirect_to theme_path(theme)
+    end
+  end
 end

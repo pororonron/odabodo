@@ -3,13 +3,13 @@ class Public::FavoritesController < ApplicationController
     illustration = Illustration.find(params[:illustration_id])
     favorite = current_end_user.favorites.new(illustration_id: illustration.id)
     favorite.save
-    redirect_to illustration_path(illustration)
+    redirect_to request.referer
   end
 
   def destroy
     illustration = Illustration.find(params[:illustration_id])
     favorite = current_end_user.favorites.find_by(illustration_id: illustration.id)
     favorite.destroy
-    redirect_to illustration_path(illustration)
+    redirect_to request.referer
   end
 end

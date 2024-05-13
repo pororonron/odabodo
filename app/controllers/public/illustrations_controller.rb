@@ -68,4 +68,11 @@ class Public::IllustrationsController < ApplicationController
   def illustration_params
     params.require(:illustration).permit(:theme_id, :title, :detail, :illustration_tag_name, challenged_images: [])
   end
+
+  def is_matching_login_end_user
+    illustration = Illustration.find(params[:id])
+    unless illustration.end_user_id == current_end_user.id
+      redirect_to illustration_path(illustration)
+    end
+  end
 end

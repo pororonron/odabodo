@@ -41,13 +41,14 @@ class Public::SessionsController < Devise::SessionsController
   end
 
   private
-  
+
   def end_user_state
-    end_user = EndUser.find_by(params[:end_user][:email])
-    return if end_user.nill?
-    return unless end_user.valid_password?(params[:end_user][:password])
-    return if end_user(is_active: true)?
+    @end_user = EndUser.find_by(email: params[:end_user][:email])
+    return if @end_user.nil?
+    return unless @end_user.valid_password?(params[:end_user][:password])
+    return if @end_user.is_active?
     reset_session
+    flash[:notice] = "該当したユーザーは退会しています。"
     redirect_to choice_path
   end
   # If you have extra params to permit, append them to the sanitizer.

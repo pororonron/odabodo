@@ -11,6 +11,10 @@ class EndUser < ApplicationRecord
   has_many :illustration_comments, dependent: :destroy
   has_many :favorites, dependent: :destroy
   has_many :bookmarks, dependent: :destroy
+  has_many :followers, class_name: "FollowRelationship", foreign_key: "follower_id", dependent: :destroy
+  has_many :follows, class_name: "FollowRelationship", foreign_key: "followed_id", dependent: :destroy
+  has_many :following_end_users, through: :followers, source: :followed
+  has_many :follower_end_users, through: :followeds, source: :follower
   validates :name, presence: true,
     length: { maximum: 30 }
   validates :self_introduction,
@@ -30,5 +34,17 @@ class EndUser < ApplicationRecord
       profile_image.attach(io: File.open(file_path), filename: 'no-image.jpg', content_type: 'image/jpeg')
     end
     profile_image.variant(resize_to_limit: [width, height]).processed
+  end
+
+  def follow(end_user_id)
+    followers.create(followed_id: end_user_id)
+  end
+
+  def unfollow(end_user_id)
+    followers.find_by(followed_id: end_user_id).destroy
+  end
+
+  def following?(end_user)
+    following_end_users.include?(end_user)
   end
 end
