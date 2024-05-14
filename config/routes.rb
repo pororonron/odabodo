@@ -30,7 +30,7 @@ Rails.application.routes.draw do
           patch :withdraw
         end
         member do
-          get :follows, :followers
+          get :follows
         end
         resource :follow_relationships, only: [:create, :destroy]
       end

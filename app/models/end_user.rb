@@ -14,7 +14,7 @@ class EndUser < ApplicationRecord
   has_many :followers, class_name: "FollowRelationship", foreign_key: "follower_id", dependent: :destroy
   has_many :follows, class_name: "FollowRelationship", foreign_key: "followed_id", dependent: :destroy
   has_many :following_end_users, through: :followers, source: :followed
-  has_many :follower_end_users, through: :followeds, source: :follower
+  has_many :follower_end_users, through: :follows, source: :follower
   validates :name, presence: true,
     length: { maximum: 30 }
   validates :self_introduction,

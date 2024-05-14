@@ -1,0 +1,38 @@
+<%= javascript_include_tag 'style' %>
+<%= render "profile", end_user: @end_user %>
+
+<div>
+  <span><strong><%= @end_user.followers.count %></strong>フォロー中</span>
+  <span><strong><%= @end_user.follows.count %></strong>フォロワー</span>
+</div>
+
+<div>
+  <ul class="nav nav-tabs tab_area">
+    <li class="nav-item">
+      <button class="nav-link" type="button">
+        <%= link_to end_user_path(@end_user) do %>
+          <i class="fa-solid fa-arrow-left"></i>
+        <% end %>
+      </button>
+    </li>
+    <li id="tab3" class="nav-item">
+      <button class="nav-link active" data-toggle="tab" data-target="#tabFollowing" type="button">
+        フォロー中
+      </button>
+    </li>
+    <li id="tab4" class="nav-item">
+      <button class="nav-link" data-toggle="tab" data-target="#tabFollower" type="button">
+        フォロワー
+      </button>
+    </li>
+  </ul>
+
+  <div class="tab-content">
+    <div id="tabFollowing" class="tab-pane content_area active">
+      <%= render "follow_relationship", end_users: @following_end_users %>
+    </div>
+    <div id="tabFollower" class="tab-pane content_area">
+      <%= render "follow_relationship", end_users: @follower_end_users %>
+    </div>
+  </div>
+</div>

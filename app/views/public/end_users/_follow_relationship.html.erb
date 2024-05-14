@@ -1,0 +1,23 @@
+<table>
+  <tbody>
+    <% end_users.each do |end_user| %>
+      <tr>
+        <%= link_to end_user_path(end_user) do %>
+          <%= image_tag end_user.get_profile_image(50, 50) %>
+          <p><%= end_user.name %>さん</p>
+          <p><%= end_user.self_introduction %></p>
+          <% if end_user == current_end_user %>
+          <% elsif current_end_user.following?(end_user) %>
+            <p>
+              <%= link_to "フォロー中", end_user_follow_relationships_path(end_user.id), method: :delete, class: "btn btn-success" %>
+            </p>
+          <% else %>
+            <p>
+              <%= link_to "フォローする", end_user_follow_relationships_path(end_user.id), method: :post, class: "btn btn-success" %>
+            </p>
+          <% end %>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -37,14 +37,16 @@ class Public::EndUsersController < ApplicationController
   end
   
   def follows
-    end_user = EndUser.find(params[:id])
-    @end_users = end_user.following_end_users
+    @end_user = EndUser.find(params[:id])
+    @end_users = @end_user.following_end_users
+    @following_end_users = @end_user.following_end_users
+    @follower_end_users = @end_user.follower_end_users
   end
 
-  def followers 
-    end_user = EndUser.find(params[:end_user_id])
-    @end_users = end_user.follower_end_users
-  end
+  # def followers 
+  #   end_user = EndUser.find(params[:end_user_id])
+  #   @end_users = end_user.follower_end_users
+  # end
   
   private
 
