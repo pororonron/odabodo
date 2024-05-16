@@ -58,7 +58,6 @@ class Public::ThemesController < ApplicationController
     params
   end
 
-
   private
 
   def theme_params

@@ -33,7 +33,7 @@ class Public::EndUsersController < ApplicationController
     current_end_user.update(is_active: false)
     reset_session
     flash[:notice] = "退会処理を実行しました。"
-    redirect_to choice_path
+    redirect_to choice_homespath
   end
   
   def follows
