@@ -10,6 +10,7 @@ class Public::HomesController < ApplicationController
   end
 
   def search
+    @content = params["title"]
     if params[:title].present?
       @themes = Theme.where('title LIKE?', "%#{params[:title]}%")
       @illustrations = Illustration.where('title LIKE?', "%#{params[:title]}%")
@@ -19,17 +20,18 @@ class Public::HomesController < ApplicationController
       @illustrations = Illustration.none
       @end_users = EndUser.none
     end
-
-    # if params[:name].present?
-    #   @themes = Theme.where('tag LIKE?', "%#{params[:tag]}%")
-    #   @illustrations = Illustration.where('tag LIKE?', "%#{params[:tag]}%")
-    # else
-    #   @themes = Theme.none
-    #   @illustrations = Illustration.none
-    # end
-  end
   end
 
   def search_tag
+    @content = params["title"]
+    if params[:title].present?
+      theme_tags = ThemeTag.where('name LIKE?', "%#{params[:title]}%")
+      @theme = theme_tags.theme_tag_middle
+      @illustrations = IllustrationTag.where('name LIKE?', "%#{params[:title]}%")
+    else
+      @themes = ThemeTag.none
+      @illustrations = IllustrationTag.none
+    end
+  end
 
 end
