@@ -25,12 +25,12 @@ class Public::HomesController < ApplicationController
   def search_tag
     @content = params["title"]
     if params[:title].present?
-      theme_tags = ThemeTag.where('name LIKE?', "%#{params[:title]}%")
-      @theme = theme_tags.theme_tag_middle
-      @illustrations = IllustrationTag.where('name LIKE?', "%#{params[:title]}%")
+      # @themes = ThemeTag.find('name LIKE?', "%#{params[:title]}%").themes.all
+      @themes = ThemeTag.where('name LIKE?', "#{params[:title]}")
+      @illustrations = params[:name].present? ? IllustrationTag.find(params[:title]).illustrations : Illustration.all
     else
-      @themes = ThemeTag.none
-      @illustrations = IllustrationTag.none
+      @themes = Theme.none
+      @illustrations = Illustration.none
     end
   end
 
