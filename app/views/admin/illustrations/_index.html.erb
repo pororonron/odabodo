@@ -1,0 +1,9 @@
+<% illustrations.each do |illustration| %>
+  <div>
+    <%= link_to admin_illustration_path(illustration.id) do %>
+      <%= image_tag illustration.challenged_images[0].variant(resize: '250x250').processed %>
+      <%= illustration.title %>
+      <%= illustration.end_user.name %>
+    <% end %>
+  </div>
+<% end %>

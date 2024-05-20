@@ -1,0 +1,37 @@
+<div>
+  <%= image_tag @theme.end_user.get_profile_image(100, 100) %>
+  <%= link_to end_user_path(@theme.end_user) do %>
+    <%= @theme.end_user.name %>さん
+  <% end %>
+
+
+    <%= link_to 'お題内容を編集する', edit_admin_theme_path(@theme), class: "btn btn-sm btn-success" %>
+
+
+  <p>お題：<strong><%= @theme.title %></strong></p>
+  <% @theme_tags.each do |theme_tag| %>
+    #<%= theme_tag %>
+  <% end %>
+  <p><%= @theme.detail %></p>
+  <% if @theme.reference_images.attached? %>
+    <p>参照画像</p>
+    <% @theme.reference_images.each do |reference_image| %>
+      <%= link_to image_tag(reference_image.variant(resize: '250x250').processed), url_for(reference_image) %>
+    <% end %>
+  <% end %>
+  <p><%= @theme.created_at %></p>
+
+
+  <div>
+
+
+    <% @theme.theme_comments.each do |theme_comment| %>
+      <%= image_tag theme_comment.end_user.get_profile_image(50, 50) %>
+      <%= theme_comment.end_user.name %> さん
+      <%= theme_comment.comment %>
+      <%= theme_comment.created_at %>
+      <%= link_to '削除', admin_theme_theme_comment_path(theme_comment.theme, theme_comment), method: :delete,
+        class: "btn btn-sm btn-secondary" %>
+    <% end %>
+  </div>
+</div>

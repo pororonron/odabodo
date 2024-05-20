@@ -1,0 +1,49 @@
+<div>
+  <%= image_tag @illustration.end_user.get_profile_image(100, 100) %>
+  <%= link_to end_user_path(@illustration.end_user_id) do %>
+    <%= @illustration.end_user.name %>さん
+  <% end %>
+
+
+    <%= link_to 'イラスト内容を編集する', edit_illustration_path(@illustration), class: "btn btn-sm btn-success" %>
+
+
+  <div>
+    <% @illustration.challenged_images.each do |challenged_image| %>
+      <%= link_to image_tag(challenged_image.variant(resize: '700x1000').processed), url_for(challenged_image) %>
+    <% end %>
+    <p><%= @illustration.created_at %></p>
+  </div>
+
+  <p><strong><%= @illustration.title %></strong></p>
+  <p>お題：<%= @illustration.theme.title %></p>
+  <% @illustration_tags.each do |illustration_tag| %>
+    #<%= illustration_tag %>
+  <% end %>
+  <p><%= @illustration.detail %></p>
+
+
+        <i class="fa-solid fa-heart"></i>
+        <%= @illustration.favorites.count %>
+
+
+
+
+        <i class="fa-solid fa-bookmark"></i>
+        <%= @illustration.bookmarks.count %>
+
+
+
+
+  <div>
+
+
+    <% @illustration.illustration_comments.each do |illustration_comment| %>
+      <%= image_tag illustration_comment.end_user.get_profile_image(50, 50) %>
+      <%= illustration_comment.end_user.name %> さん
+      <%= illustration_comment.comment %>
+      <%= illustration_comment.created_at %>
+
+    <% end %>
+  </div>
+</div>

@@ -19,9 +19,14 @@ class Theme < ApplicationRecord
   after_update :update_theme_tags
 
   def save_theme_tags
-    theme_tag_names = @theme_tag_name.split(',')
+    theme_tag_names = @theme_tag_name.split(',').uniq
     theme_tag_names.each do |new_theme_tag|
-      self.theme_tags.find_or_create_by(name: new_theme_tag)
+      if ThemeTag.exists?(name: new_theme_tag)
+        theme_tag = ThemeTag.find_by(name: new_theme_tag)
+        ThemeTagMiddle.create(theme_id: self.id, theme_tag_id: theme_tag.id)
+      else
+        self.theme_tags.create(name: new_theme_tag)
+      end
     end
   end
 

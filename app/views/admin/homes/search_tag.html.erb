@@ -1,0 +1,25 @@
+<h1>タグ「<strong><%= @content %></strong>」の検索結果</h1>
+
+<div>
+  <ul class="nav nav-tabs tab-area">
+    <li class="nav-item">
+      <button class="nav-link active" data-toggle="tab" data-target="#tabTheme" type="button">
+        お題
+      </button>
+    </li>
+    <li class="nav-item">
+      <button class="nav-link" data-toggle="tab" data-target="#tabIllustration" type="button">
+        イラスト
+      </button>
+    </li>
+  </ul>
+
+  <div class="tab-content">
+    <div id="tabTheme" class="tab-pane content_area active">
+      <%= render "public/themes/index", themes: @themes %>
+    </div>
+    <div id="tabIllustration" class="tab-pane content_area">
+      <%= render "public/illustrations/index", illustrations: @illustrations %>
+    </div>
+  </div>
+</div>

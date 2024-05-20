@@ -14,6 +14,16 @@
     <header>
       <% if admin_signed_in? %>
         <div>
+          <div>
+            <%= link_to '<<<<<<<<<<<<お題 | イラスト', theme_and_illustration_admin_homes_path %>
+          </div>
+
+          <div class="search_form">
+            <%= form_with url: search_admin_homes_path, method: :get, local: true do |f| %>
+              <%= f.text_field :title %>
+              <%= f.submit "検索する", class: "btn btn-primary" %>
+            <% end %>
+          </div>
           <%= link_to 'ログアウトする', destroy_admin_session_path, method: :DELETE %>
         </div>
       <% end %>

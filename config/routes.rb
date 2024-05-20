@@ -9,6 +9,39 @@ Rails.application.routes.draw do
 
   namespace :admin do
     root to: 'homes#top'
+
+    resources :homes, only: [] do
+      collection do
+        get :choice, :search, :search_tag, :theme_and_illustration, :comment
+      end
+    end
+
+    resources :end_users, only: [:show, :edit, :update] do
+      collection do
+        get :confirm
+        patch :withdraw
+      end
+      member do
+        get :follows
+      end
+      resource :follow_relationships, only: [:create, :destroy]
+    end
+
+    resources :themes do
+      get :challenge_themes, on: :member
+      resource :challenge_theme, only: [:create, :destroy]
+      resources :theme_comments, only: [:create, :destroy]
+    end
+
+    resources :illustrations do
+      member do
+        get :favorites
+        get :bookmarks
+      end
+      resource :favorite, only: [:create, :destroy]
+      resource :bookmark, only: [:create, :destroy]
+      resources :illustration_comments, only: [:create, :destroy]
+    end
   end
 
   scope module: :public do
@@ -38,13 +71,9 @@ Rails.application.routes.draw do
       end
       resource :follow_relationships, only: [:create, :destroy]
     end
-      #get 'confirm' => 'end_users#confirm', as: 'end_user_confirm'
-      # patch 'withdraw' => 'end_users#withdraw', as: 'withdraw'
-
 
     resources :themes do
       get :challenge_themes, on: :member
-      # get :search, on: :collection
       resource :challenge_theme, only: [:create, :destroy]
       resources :theme_comments, only: [:create, :destroy]
     end
@@ -54,14 +83,11 @@ Rails.application.routes.draw do
         get :favorites
         get :bookmarks
       end
-      # get :search, on: :collection
       resource :favorite, only: [:create, :destroy]
       resource :bookmark, only: [:create, :destroy]
       resources :illustration_comments, only: [:create, :destroy]
     end
 
-    # get 'choice' => 'homes#choice', as: 'choice'
-    # get 'search' => 'homes#search', as: 'search'
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
