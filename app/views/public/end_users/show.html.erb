@@ -10,12 +10,12 @@
 <div>
   <ul class="nav nav-tabs tab-area">
     <li class="nav-item">
-      <button class="nav-link" data-toggle="tab" data-target="#tabTheme" type="button">
+      <button class="nav-link active" data-toggle="tab" data-target="#tabTheme" type="button">
         投稿お題
       </button>
     </li>
     <li class="nav-item">
-      <button class="nav-link active" data-toggle="tab" data-target="#tabIllustration" type="button">
+      <button class="nav-link" data-toggle="tab" data-target="#tabIllustration" type="button">
         投稿イラスト
       </button>
     </li>
@@ -37,10 +37,10 @@
   </ul>
 
   <div class="tab-content">
-    <div id="tabTheme" class="tab-pane content_area">
+    <div id="tabTheme" class="tab-pane content_area active">
       <%= render "public/themes/index", themes: @themes %>
     </div>
-    <div id="tabIllustration" class="tab-pane content_area active">
+    <div id="tabIllustration" class="tab-pane content_area">
       <%= render "public/illustrations/index", illustrations: @illustrations %>
     </div>
     <div id="tabFavorite" class="tab-pane content_area">

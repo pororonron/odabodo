@@ -10,7 +10,9 @@
 
   <p>お題：<strong><%= @theme.title %></strong></p>
   <% @theme_tags.each do |theme_tag| %>
-    #<%= theme_tag %>
+    <%= link_to search_tag_homes_path(title: theme_tag), method: :get do %>
+      #<%= theme_tag %>
+    <% end %>
   <% end %>
   <p><%= @theme.detail %></p>
   <% if @theme.reference_images.attached? %>
@@ -30,6 +32,8 @@
       <%= link_to 'このお題に挑戦する！', theme_challenge_theme_path(@theme), method: :post, class: "btn btn-sm btn-success" %>
     </p>
   <% end %>
+
+  <%= link_to 'このお題に挑戦したイラストを見る', challenged_image_theme_path(@theme), class: "btn btn-info mb-3" %>
 
   <div>
     <%= form_with model: [@theme, @theme_comment], local: true do |f| %>

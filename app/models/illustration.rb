@@ -12,9 +12,9 @@ class Illustration < ApplicationRecord
     length: { maximum: 30 }
   validates :detail,
     length: { maximum: 1000 }
+  validates :challenged_images, presence: true
 
-  validate :require_illustration_tags
-
+  # validate :require_illustration_tags
 
   attr_writer :illustration_tag_name, :select_theme
 
@@ -22,9 +22,14 @@ class Illustration < ApplicationRecord
   after_update :update_illustration_tags
 
   def save_illustration_tags
-    illustration_tag_names = @illustration_tag_name.split(',')
+    illustration_tag_names = @illustration_tag_name.split(" ").uniq
     illustration_tag_names.each do |new_illustration_tag|
-      self.illustration_tags.find_or_create_by(name: new_illustration_tag)
+      if IllustrationTag.exists?(name: new_illustration_tag)
+        illustration_tag = IllustrationTag.find_by(name: new_illustration_tag)
+        IllustrationTagMiddle.create(illustration_id: self.id, illustration_tag_id: illustration_tag.id)
+      else
+        self.illustration_tags.create(name: new_illustration_tag)
+      end
     end
   end
 
@@ -34,7 +39,7 @@ class Illustration < ApplicationRecord
   end
 
   def illustration_tag_name
-    illustration_tags.pluck(:name).join(",")
+    illustration_tags.pluck(:name).join(" ")
   end
 
   def favorited_by?(end_user)
@@ -45,15 +50,4 @@ class Illustration < ApplicationRecord
     bookmarks.exists?(end_user_id: end_user.id)
   end
 
-  private
-
-  def require_illustration_tags
-    if @illustration_tag_name.blank?
-      errors.add(:illustration_tag_name, "タグは必須です")
-    end
-  end
-
-  def self.looks(word)
-    @illustration = Illustration.where("title LIKE?", "#{word}")
-  end
 end

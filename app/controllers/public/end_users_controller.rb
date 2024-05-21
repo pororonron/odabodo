@@ -1,4 +1,6 @@
 class Public::EndUsersController < ApplicationController
+  before_action :ensure_guest_end_user, only: [:edit]
+
   def show
     @end_user = EndUser.find(params[:id])
     @themes = @end_user.themes.all
@@ -35,7 +37,7 @@ class Public::EndUsersController < ApplicationController
     flash[:notice] = "退会処理を実行しました。"
     redirect_to choice_homes_path
   end
-  
+
   def follows
     @end_user = EndUser.find(params[:id])
     @end_users = @end_user.following_end_users
@@ -43,11 +45,6 @@ class Public::EndUsersController < ApplicationController
     @follower_end_users = @end_user.follower_end_users
   end
 
-  # def followers 
-  #   end_user = EndUser.find(params[:end_user_id])
-  #   @end_users = end_user.follower_end_users
-  # end
-  
   private
 
   def end_user_params
@@ -58,6 +55,14 @@ class Public::EndUsersController < ApplicationController
     end_user = EndUser.find(params[:id])
     unless end_user.id == current_end_user.id
       redirect_to end_user_path
+    end
+  end
+
+  def ensure_guest_end_user
+    @end_user = EndUser.find(params[:id])
+    if @end_user.guest_end_user?
+      redirect_to end_user_path(current_end_user),
+        notice: "ゲストユーザーはプロフィール編集画面へ遷移できません。"
     end
   end
 end

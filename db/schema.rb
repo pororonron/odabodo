@@ -166,6 +166,7 @@ ActiveRecord::Schema.define(version: 2024_05_13_072808) do
     t.integer "end_user_id", null: false
     t.string "title", default: "無題", null: false
     t.text "detail"
+    t.boolean "is_active", default: true, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

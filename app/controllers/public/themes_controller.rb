@@ -58,6 +58,23 @@ class Public::ThemesController < ApplicationController
     params
   end
 
+  def challenged_image
+    @theme = Theme.find(params[:id])
+    @content = @theme.title
+    if @theme.illustrations
+      @illustrations = @theme.illustrations
+    else
+      @illustrations = Illustration.none
+    end
+  end
+
+  def withdraw
+    @theme = Theme.find(params[:id])
+    @theme.update(is_active: false)
+    flash[:notice] = "お題を削除しました。"
+    redirect_to root_path
+  end
+
   private
 
   def theme_params

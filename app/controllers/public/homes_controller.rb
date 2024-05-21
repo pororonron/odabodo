@@ -25,11 +25,19 @@ class Public::HomesController < ApplicationController
   def search_tag
     @content = params["title"]
     if params[:title].present?
-      # @themes = ThemeTag.find('name LIKE?', "%#{params[:title]}%").themes.all
       theme_tag = ThemeTag.find_by(name: params[:title])
-      @themes =  theme_tag.themes
+      if theme_tag
+        @themes = theme_tag.themes
+      else
+        @themes = Theme.none
+      end
 
-      @illustrations = params[:name].present? ? IllustrationTag.find(params[:title]).illustrations : Illustration.all
+      illustration_tag = IllustrationTag.find_by(name: params[:title])
+      if illustration_tag
+        @illustrations = illustration_tag.illustrations
+      else
+        @illustrations = IllustrationTag.none
+      end
     else
       @themes = Theme.none
       @illustrations = Illustration.none

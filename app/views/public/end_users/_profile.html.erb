@@ -2,17 +2,19 @@
   <%= image_tag end_user.get_profile_image(200, 200) %>
   <%= end_user.name %>さん
   <%= end_user.self_introduction %>
-  <% if end_user == current_end_user %>
-    <p><%= link_to "プロフィール編集", edit_end_user_path %></p>
-  <% else %>
-    <% if current_end_user.following?(end_user) %>
-      <p>
-        <%= link_to "フォロー中", end_user_follow_relationships_path(end_user.id), method: :delete, class: "btn btn-success" %>
-      </p>
+  <% unless end_user.guest_end_user? %>
+    <% if end_user == current_end_user %>
+      <p><%= link_to "プロフィール編集", edit_end_user_path %></p>
     <% else %>
-      <p>
-        <%= link_to "フォローする", end_user_follow_relationships_path(end_user.id), method: :post, class: "btn btn-success" %>
-      </p>
+      <% if current_end_user.following?(end_user) %>
+        <p>
+          <%= link_to "フォロー中", end_user_follow_relationships_path(end_user.id), method: :delete, class: "btn btn-success" %>
+        </p>
+      <% else %>
+        <p>
+          <%= link_to "フォローする", end_user_follow_relationships_path(end_user.id), method: :post, class: "btn btn-success" %>
+        </p>
+      <% end %>
     <% end %>
   <% end %>
 </div>

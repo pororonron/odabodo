@@ -16,9 +16,15 @@
   </div>
 
   <p><strong><%= @illustration.title %></strong></p>
-  <p>お題：<%= @illustration.theme.title %></p>
+  <p>
+    <%= link_to theme_path(@illustration.theme_id) do %>
+      お題：<%= @illustration.theme.title %>
+    <% end %>
+  </p>
   <% @illustration_tags.each do |illustration_tag| %>
-    #<%= illustration_tag %>
+    <%= link_to search_tag_homes_path(title: illustration_tag), method: :get do %>
+      #<%= illustration_tag %>
+    <% end %>
   <% end %>
   <p><%= @illustration.detail %></p>
 
@@ -66,7 +72,8 @@
       <%= illustration_comment.comment %>
       <%= illustration_comment.created_at %>
       <% if illustration_comment.end_user == current_end_user %>
-        <%= link_to '削除', illustration_illustration_comment_path(illustration_comment.illustration, illustration_comment), method: :delete, class: "btn btn-sm btn-secondary" %>
+        <%= link_to '削除', illustration_illustration_comment_path(illustration_comment.illustration, illustration_comment),
+          method: :delete, class: "btn btn-sm btn-secondary" %>
       <% end %>
     <% end %>
   </div>

@@ -11,7 +11,7 @@ class Theme < ApplicationRecord
   validates :detail,
     length: { maximum: 1000 }
 
-  validate :require_theme_tags
+  # validate :require_theme_tags
 
   attr_writer :theme_tag_name
 
@@ -19,7 +19,7 @@ class Theme < ApplicationRecord
   after_update :update_theme_tags
 
   def save_theme_tags
-    theme_tag_names = @theme_tag_name.split(',').uniq
+    theme_tag_names = @theme_tag_name.split(" ").uniq
     theme_tag_names.each do |new_theme_tag|
       if ThemeTag.exists?(name: new_theme_tag)
         theme_tag = ThemeTag.find_by(name: new_theme_tag)
@@ -31,27 +31,18 @@ class Theme < ApplicationRecord
   end
 
   def update_theme_tags
-    theme_tags.destroy_all
-    save_theme_tags
+    if self.is_active
+      theme_tags.destroy_all
+      save_theme_tags
+    end
   end
 
   def theme_tag_name
-    theme_tags.pluck(:name).join(",")
+    theme_tags.pluck(:name).join(" ")
   end
 
   def theme_challenged_by?(end_user)
     challenge_themes.exists?(end_user_id: end_user.id)
   end
 
-  def self.looks(word)
-    @theme = Theme.where("title LIKE?", "%#{word}")
-  end
 end
-
-  private
-
-  def require_theme_tags
-    if @theme_tag_name.blank?
-      errors.add(:theme_tag_name, "タグは必須です")
-    end
-  end

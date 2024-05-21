@@ -32,8 +32,9 @@
         </div>
       <% end %>
     </div>
-    <%= f.submit '更新する', class: "btn btn-success my-3" %>
-    <%= link_to '削除する', theme_path, method: :delete, "data-confirm" => "本当に削除しますか？
+    <%= f.submit '変更を保存する', class: "btn btn-success my-3" %>
+    <%= link_to '編集を辞める', theme_path(@theme), class: "btn btn-secondary" %>
+    <%= link_to '削除する', withdraw_theme_path(@theme), method: :patch, "data-confirm" => "本当に削除しますか？
     \n現在挑戦されている方がいるかもしれません。" %>
   <% end %>
 </div>

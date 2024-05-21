@@ -73,15 +73,17 @@ Rails.application.routes.draw do
     end
 
     resources :themes do
-      get :challenge_themes, on: :member
+      member do
+        get :challenge_themes, :challenged_image
+        patch :withdraw
+      end
       resource :challenge_theme, only: [:create, :destroy]
       resources :theme_comments, only: [:create, :destroy]
     end
 
     resources :illustrations do
       member do
-        get :favorites
-        get :bookmarks
+        get :favorites, :bookmarks
       end
       resource :favorite, only: [:create, :destroy]
       resource :bookmark, only: [:create, :destroy]
