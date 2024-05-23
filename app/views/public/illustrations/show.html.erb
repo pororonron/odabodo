@@ -17,8 +17,12 @@
 
   <p><strong><%= @illustration.title %></strong></p>
   <p>
-    <%= link_to theme_path(@illustration.theme_id) do %>
-      お題：<%= @illustration.theme.title %>
+    <% if @illustration.theme.is_active == true %>
+      <%= link_to theme_path(@illustration.theme_id) do %>
+        お題：<%= @illustration.theme.title %>
+      <% end %>
+    <% else %>
+      挑戦したお題は削除されています
     <% end %>
   </p>
   <% @illustration_tags.each do |illustration_tag| %>

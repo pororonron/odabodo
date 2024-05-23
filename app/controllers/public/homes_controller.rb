@@ -2,7 +2,7 @@ class Public::HomesController < ApplicationController
   before_action :authenticate_end_user!, except: [:choice]
 
   def top
-    @themes = Theme.all
+    @themes = Theme.where(is_active: true)
     @illustrations = Illustration.all
   end
 

@@ -5,7 +5,7 @@ class EndUser < ApplicationRecord
          :recoverable, :rememberable, :validatable
   has_one_attached :profile_image
   has_many :themes, dependent: :destroy
-  has_many :challenge_themes, dependent: :destroy
+  has_many :challenge_themes, lambda { joins(:theme).where(theme: {is_active: true}) }, dependent: :destroy
   has_many :theme_comments, dependent: :destroy
   has_many :illustrations, dependent: :destroy
   has_many :illustration_comments, dependent: :destroy

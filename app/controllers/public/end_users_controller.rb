@@ -3,7 +3,7 @@ class Public::EndUsersController < ApplicationController
 
   def show
     @end_user = EndUser.find(params[:id])
-    @themes = @end_user.themes.all
+    @themes = @end_user.themes.where(is_active: true)
     @illustrations = @end_user.illustrations.all
 
     favorites = Favorite.where(end_user_id: @end_user.id).pluck(:illustration_id)
@@ -13,7 +13,7 @@ class Public::EndUsersController < ApplicationController
     @bookmark_illustrations = Illustration.find(bookmarks)
 
     challenge_themes = ChallengeTheme.where(end_user_id: @end_user.id).pluck(:theme_id)
-    @challenge_themes = Theme.find(challenge_themes)
+    @challenge_themes = Theme.where(is_active: true, id: challenge_themes)
   end
 
   def edit
@@ -31,18 +31,28 @@ class Public::EndUsersController < ApplicationController
   def confirm
   end
 
+  def follows
+    @end_user = EndUser.find(params[:id])
+    # @end_users = @end_user.following_end_users
+    @following_end_users = @end_user.following_end_users
+    @follower_end_users = @end_user.follower_end_users
+  end
+
   def withdraw
     current_end_user.update(is_active: false)
+    current_end_user.following_end_users.destroy_all
+    current_end_user.follower_end_users.destroy_all
+    current_end_user.illustrations.destroy_all
+    current_end_user.illustration_comments.destroy_all
+    current_end_user.theme_comments.destroy_all
+    current_end_user.themes.update_all(is_active: false)
+    # current_end_user.illustrations.destroy
+    # current_end_user.following_end_users.each do |following_end_user|
+    #   following_end_user.following_end_users.destroy(current_end_user)
+    # end
     reset_session
     flash[:notice] = "退会処理を実行しました。"
     redirect_to choice_homes_path
-  end
-
-  def follows
-    @end_user = EndUser.find(params[:id])
-    @end_users = @end_user.following_end_users
-    @following_end_users = @end_user.following_end_users
-    @follower_end_users = @end_user.follower_end_users
   end
 
   private

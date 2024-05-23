@@ -6,11 +6,11 @@ class Theme < ApplicationRecord
   has_many :challenge_themes, dependent: :destroy
   has_many :theme_comments, dependent: :destroy
   has_many :illustrations, dependent: :destroy
+
   validates :title, presence: true,
     length: { maximum: 30 }
   validates :detail,
     length: { maximum: 1000 }
-
   # validate :require_theme_tags
 
   attr_writer :theme_tag_name
@@ -44,5 +44,11 @@ class Theme < ApplicationRecord
   def theme_challenged_by?(end_user)
     challenge_themes.exists?(end_user_id: end_user.id)
   end
+
+  # def require_theme_tags
+  #   if theme_tags.blank?
+  #     errors.add(:base, "タグは必ず選択してください")
+  #   end
+  # end
 
 end

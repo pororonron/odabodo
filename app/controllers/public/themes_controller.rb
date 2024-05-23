@@ -1,4 +1,5 @@
 class Public::ThemesController < ApplicationController
+  before_action :is_active, only: [:show, :edit]
   def new
     @theme = Theme.new
   end
@@ -43,11 +44,11 @@ class Public::ThemesController < ApplicationController
     end
   end
 
-  def destroy
-    theme = Theme.find(params[:id])
-    theme.destroy
-    redirect_to root_path
-  end
+  # def destroy
+  #   theme = Theme.find(params[:id])
+  #   theme.destroy
+  #   redirect_to root_path
+  # end
 
   def reference_images_resize(params)
     if params[:reference_images]
@@ -85,6 +86,13 @@ class Public::ThemesController < ApplicationController
     theme = Theme.find(params[:id])
     unless theme.end_user_id == current_end_user.id
       redirect_to theme_path(theme)
+    end
+  end
+
+  def is_active
+    theme = Theme.find(params[:id])
+    unless theme.is_active == true
+      redirect_to root_path
     end
   end
 end
