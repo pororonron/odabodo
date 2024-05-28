@@ -14,7 +14,7 @@ class Public::ThemesController < ApplicationController
   end
 
   def index
-    @themes = Theme.all
+    @themes = Theme.where(is_active: true)
     @illustrations = Illustration.all
   end
 
@@ -44,12 +44,6 @@ class Public::ThemesController < ApplicationController
     end
   end
 
-  # def destroy
-  #   theme = Theme.find(params[:id])
-  #   theme.destroy
-  #   redirect_to root_path
-  # end
-
   def reference_images_resize(params)
     if params[:reference_images]
       params[:reference_images].each do |reference_image|
@@ -70,8 +64,8 @@ class Public::ThemesController < ApplicationController
   end
 
   def withdraw
-    @theme = Theme.find(params[:id])
-    @theme.update(is_active: false)
+    theme = Theme.find(params[:id])
+    theme.update(is_active: false, theme_tag_name: "deleted")
     flash[:notice] = "お題を削除しました。"
     redirect_to root_path
   end

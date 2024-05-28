@@ -17,7 +17,7 @@ class Public::IllustrationsController < ApplicationController
 
   def index
     @illustrations = Illustration.all
-    @themes = Theme.all
+    @themes = Theme.where(is_active: true)
   end
 
   def show

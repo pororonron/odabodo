@@ -1,28 +1,28 @@
 <h1>イラストを編集する</h1>
 
 <div>
-  <%= form_with model: @illustration, local: true do |f| %>
+  <%= form_with model: @illustration, url: admin_illustration_path, local: true do |f| %>
     <div>
       <label for="SelectTheme", class="mb-3">お題選択</label>
       <%= f.select :theme_id, options_from_collection_for_select(@select_themes, :id, :title),
          id: "SelectTheme", class: "form-control" %>
     </div>
-    <div class="mt-3">
-      <p>画像選択</p>
-      <p>ファイル複数選択：</p>
-      <%= f.file_field :challenged_images, accept: "image/*", multiple: true %>
-      <% if @illustration.challenged_images.attached? %>
-        <p>選択済みの画像(削除したい画像にはチェックを入れてください)</p>
-        <div style="display: flex; flex-wrap: wrap; width: 750px;">
-          <% @illustration.challenged_images.each do |challenged_image| %>
-            <div style="display: flex; margin:5px 5px 0;">
-              <%= f.check_box :challenged_image_ids, { multiple: true }, challenged_image.id, false %>
-              <label for="illustration_challenged_image_ids_<%= challenged_image.id %>">
-                <%= image_tag challenged_image.variant(resize: '250x250').processed %>
-              </label>
-            </div>
-          <% end %>
-        </div>
+    <!--<div class="mt-3">-->
+    <!--  <p>画像選択</p>-->
+    <!--  <p>ファイル複数選択：</p>-->
+    <!--  <%= f.file_field :challenged_images, accept: "image/*", multiple: true %>-->
+    <!--  <% if @illustration.challenged_images.attached? %>-->
+    <!--    <p>選択済みの画像(削除したい画像にはチェックを入れてください)</p>-->
+    <!--    <div style="display: flex; flex-wrap: wrap; width: 750px;">-->
+    <!--      <% @illustration.challenged_images.each do |challenged_image| %>-->
+    <!--        <div style="display: flex; margin:5px 5px 0;">-->
+    <!--          <%= f.check_box :challenged_image_ids, { multiple: true }, challenged_image.id, false %>-->
+    <!--          <label for="illustration_challenged_image_ids_<%= challenged_image.id %>">-->
+    <!--            <%= image_tag challenged_image.variant(resize: '250x250').processed %>-->
+    <!--          </label>-->
+    <!--        </div>-->
+    <!--      <% end %>-->
+    <!--    </div>-->
       <% end %>
     </div>
     <div>
@@ -37,7 +37,8 @@
       <label for="inputIllustrationTag", class="mt-3 mb-2">タグ</label>
       <%= f.text_field :illustration_tag_name, id: "inputIllustrationTag", class: "form-control" %>
     </div>
-    <%= f.submit '更新する', class: "btn btn-success my-3" %>
-    <%= link_to '削除する', illustration_path, method: :delete, "data-confirm" => "本当に削除しますか？" %>
+    <%= f.submit '変更を保存する', class: "btn btn-success my-3" %>
+    <%= link_to '編集をやめる', admin_illustration_path(@illustration), class: "btn btn-secondary" %>
+    <%= link_to '削除する', admin_illustration_path, method: :delete, "data-confirm" => "本当に削除しますか？" %>
   <% end %>
 </div>

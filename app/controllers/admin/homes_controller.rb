@@ -1,12 +1,11 @@
 class Admin::HomesController < ApplicationController
   layout 'admin'
-  before_action :authenticate_admin!
 
   def top
   end
 
   def theme_and_illustration
-    @themes = Theme.all
+    @themes = Theme.where(is_active: true)
     @illustrations = Illustration.all
   end
 
@@ -26,9 +25,19 @@ class Admin::HomesController < ApplicationController
   def search_tag
     @content = params["title"]
     if params[:title].present?
-      # @themes = ThemeTag.find('name LIKE?', "%#{params[:title]}%").themes.all
-      @themes = ThemeTag.where('name LIKE?', "#{params[:title]}")
-      @illustrations = params[:name].present? ? IllustrationTag.find(params[:title]).illustrations : Illustration.all
+      theme_tag = ThemeTag.find_by(name: params[:title])
+      if theme_tag
+        @themes = theme_tag.themes
+      else
+        @themes = Theme.none
+      end
+
+      illustration_tag = IllustrationTag.find_by(name: params[:title])
+      if illustration_tag
+        @illustrations = illustration_tag.illustrations
+      else
+        @illustrations = IllustrationTag.none
+      end
     else
       @themes = Theme.none
       @illustrations = Illustration.none
@@ -38,5 +47,9 @@ class Admin::HomesController < ApplicationController
   def comment
     @themes = ThemeComment.all
     @illustrations = IllustrationComment.all
+  end
+
+  def end_users
+    @end_users = EndUser.all
   end
 end

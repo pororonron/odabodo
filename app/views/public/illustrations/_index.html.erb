@@ -1,9 +1,17 @@
 <% illustrations.each do |illustration| %>
   <div>
-    <%= link_to illustration_path(illustration.id) do %>
-      <%= image_tag illustration.challenged_images[0].variant(resize: '250x250').processed %>
-      <%= illustration.title %>
-      <%= illustration.end_user.name %>
+    <% if current_admin %>
+      <%= link_to admin_illustration_path(illustration.id) do %>
+        <%= image_tag illustration.challenged_images[0].variant(resize: '250x250').processed %>
+        <%= illustration.title %>
+        <%= illustration.end_user.name %>
+      <% end %>
+    <% else %>
+      <%= link_to illustration_path(illustration.id) do %>
+        <%= image_tag illustration.challenged_images[0].variant(resize: '250x250').processed %>
+        <%= illustration.title %>
+        <%= illustration.end_user.name %>
+      <% end %>
     <% end %>
   </div>
 <% end %>

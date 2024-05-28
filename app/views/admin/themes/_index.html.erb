@@ -1,8 +1,0 @@
-<% themes.each do |theme| %>
-  <div>
-    <%= link_to admin_theme_path(theme.id) do %>
-      <%= image_tag theme.end_user.get_profile_image(50, 50) %>
-      <%= theme.title %>
-    <% end %>
-  </div>
-<% end %>

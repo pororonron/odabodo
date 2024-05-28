@@ -1,3 +1,4 @@
+<h1>コメント一覧</h1>
 <%= javascript_include_tag 'style' %>
 
 <div>
@@ -16,10 +17,10 @@
 
   <div class="tab-content">
     <div id="tabTheme" class="tab-pane content_area">
-      <%= render "admin/themes/comment", comments: @themes %>
+      <%= render "admin/theme_comments/comment", comments: @themes %>
     </div>
     <div id="tabIllustration" class="tab-pane content_area active">
-      <%= render "admin/illustrations/comment", comments: @illustrations %>
+      <%= render "admin/illustration_comments/comment", comments: @illustrations %>
     </div>
   </div>
 </div>

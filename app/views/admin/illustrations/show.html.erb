@@ -1,11 +1,11 @@
 <div>
   <%= image_tag @illustration.end_user.get_profile_image(100, 100) %>
-  <%= link_to end_user_path(@illustration.end_user_id) do %>
+  <%= link_to admin_end_user_path(@illustration.end_user_id) do %>
     <%= @illustration.end_user.name %>さん
   <% end %>
 
 
-    <%= link_to 'イラスト内容を編集する', edit_illustration_path(@illustration), class: "btn btn-sm btn-success" %>
+  <%= link_to 'イラスト内容を編集する', edit_admin_illustration_path(@illustration), class: "btn btn-sm btn-success" %>
 
 
   <div>
@@ -16,34 +16,41 @@
   </div>
 
   <p><strong><%= @illustration.title %></strong></p>
-  <p>お題：<%= @illustration.theme.title %></p>
+  <p>
+    <% if @illustration.theme.is_active == true %>
+      <%= link_to admin_theme_path(@illustration.theme_id) do %>
+        お題：<%= @illustration.theme.title %>
+      <% end %>
+    <% else %>
+      挑戦したお題は削除されています
+    <% end %>
+  </p>
   <% @illustration_tags.each do |illustration_tag| %>
-    #<%= illustration_tag %>
+    <%= link_to search_tag_admin_homes_path(title: illustration_tag), method: :get do %>
+      #<%= illustration_tag %>
+    <% end %>
   <% end %>
   <p><%= @illustration.detail %></p>
 
 
+    <p>
         <i class="fa-solid fa-heart"></i>
         <%= @illustration.favorites.count %>
+    </p>
 
-
-
-
+    <p>
         <i class="fa-solid fa-bookmark"></i>
         <%= @illustration.bookmarks.count %>
-
-
-
+    </p>
 
   <div>
-
-
     <% @illustration.illustration_comments.each do |illustration_comment| %>
       <%= image_tag illustration_comment.end_user.get_profile_image(50, 50) %>
       <%= illustration_comment.end_user.name %> さん
       <%= illustration_comment.comment %>
       <%= illustration_comment.created_at %>
-
+      <%= link_to '削除', admin_illustration_illustration_comment_path(illustration_comment.illustration, illustration_comment),
+          method: :delete, class: "btn btn-sm btn-secondary" %>
     <% end %>
   </div>
 </div>

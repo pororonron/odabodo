@@ -2,7 +2,12 @@
   <%= image_tag end_user.get_profile_image(200, 200) %>
   <%= end_user.name %>さん
   <%= end_user.self_introduction %>
-  <% unless end_user.guest_end_user? %>
+
+  <% if current_admin %>
+    <%= end_user.end_user_status %>
+    <p><%= link_to "プロフィール編集", edit_admin_end_user_path %></p>
+  <% elsif end_user.guest_end_user? %>
+  <% else %>
     <% if end_user == current_end_user %>
       <p><%= link_to "プロフィール編集", edit_end_user_path %></p>
     <% else %>

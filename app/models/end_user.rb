@@ -51,4 +51,13 @@ class EndUser < ApplicationRecord
   def following?(end_user)
     following_end_users.include?(end_user)
   end
+  
+  def end_user_status
+    if is_active == true
+      "有効"
+    else
+      "退会"
+    end
+  end
+  
 end

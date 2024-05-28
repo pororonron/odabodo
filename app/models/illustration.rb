@@ -14,7 +14,7 @@ class Illustration < ApplicationRecord
     length: { maximum: 1000 }
   validates :challenged_images, presence: true
 
-  # validate :require_illustration_tags
+  validate :require_illustration_tags
 
   attr_writer :illustration_tag_name, :select_theme
 
@@ -48,6 +48,12 @@ class Illustration < ApplicationRecord
 
   def bookmarked_by?(end_user)
     bookmarks.exists?(end_user_id: end_user.id)
+  end
+
+  def require_illustration_tags
+    if @illustration_tag_name.blank?
+      errors.add(:illustration_tag_name, "タグは必須です")
+    end
   end
 
 end

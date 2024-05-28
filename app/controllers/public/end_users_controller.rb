@@ -46,10 +46,7 @@ class Public::EndUsersController < ApplicationController
     current_end_user.illustration_comments.destroy_all
     current_end_user.theme_comments.destroy_all
     current_end_user.themes.update_all(is_active: false)
-    # current_end_user.illustrations.destroy
-    # current_end_user.following_end_users.each do |following_end_user|
-    #   following_end_user.following_end_users.destroy(current_end_user)
-    # end
+
     reset_session
     flash[:notice] = "退会処理を実行しました。"
     redirect_to choice_homes_path

@@ -1,7 +1,7 @@
 <h1>お題を編集する</h1>
 
 <div>
-  <%= form_with model: @theme, local: true do |f| %>
+  <%= form_with model: @theme, url: admin_theme_path, local: true do |f| %>
     <div>
       <label for="inputTitle", class="mb-2">題名</label>
       <%= f.text_field :title, id: "inputTitle", class: "form-control" %>
@@ -32,8 +32,9 @@
         </div>
       <% end %>
     </div>
-    <%= f.submit '更新する', class: "btn btn-success my-3" %>
-    <%= link_to '削除する', theme_path, method: :delete, "data-confirm" => "本当に削除しますか？
+    <%= f.submit '変更を保存する', class: "btn btn-success my-3" %>
+    <%= link_to '編集を辞める', admin_theme_path(@theme), class: "btn btn-secondary" %>
+    <%= link_to '削除する', withdraw_admin_theme_path(@theme.id), method: :patch, "data-confirm" => "本当に削除しますか？
     \n現在挑戦されている方がいるかもしれません。" %>
   <% end %>
 </div>

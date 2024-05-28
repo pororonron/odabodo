@@ -1,0 +1,15 @@
+<h1>ユーザー一覧</h1>
+
+<table>
+  <tbody>
+    <% @end_users.each do |end_user| %>
+      <tr>
+        <td><%= image_tag end_user.get_profile_image(50, 50) %></td>
+        <td><%= end_user.name %>さん</td>
+        <td><%= end_user.self_introduction %></td>
+        <td><%= end_user.end_user_status %></td>
+        <td><%= link_to '詳細', admin_end_user_path(end_user) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

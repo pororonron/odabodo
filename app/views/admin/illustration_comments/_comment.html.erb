@@ -1,7 +1,7 @@
 <% comments.each do |comment| %>
   <div>
     <%= link_to admin_illustration_path(comment.illustration_id) do %>
-      <%= image_tag comment.end_user.get_profile_image(50, 50) %>
+      <%= image_tag comment.illustration.end_user.get_profile_image(50, 50) %>
       <%= comment.comment %>
     <% end %>
   </div>

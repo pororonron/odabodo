@@ -1,0 +1,30 @@
+<h1>お題「<strong><%= content %></strong>」に挑戦したイラスト一覧</h1>
+
+<div>
+  <ul class="nav nav-tabs tab_area">
+    <li class="nav-item">
+      <button class="nav-link" type="button">
+        <% if current_admin %>
+          <%= link_to admin_theme_path(theme) do %>
+            <i class="fa-solid fa-arrow-left"></i>
+          <% end %>
+        <% else %>
+          <%= link_to theme_path(theme) do %>
+            <i class="fa-solid fa-arrow-left"></i>
+          <% end %>
+        <% end %>
+      </button>
+    </li>
+    <li class="nav-item">
+      <button class="nav-link active" data-toggle="tab" data-target="#tabChallengedImage" type="button">
+        イラスト
+      </button>
+    </li>
+  </ul>
+
+  <div class="tab-content">
+    <div id="tabChallengedImage" class="tab-pane content_area active">
+      <%= render "public/illustrations/index", illustrations: @illustrations %>
+    </div>
+  </div>
+</div>

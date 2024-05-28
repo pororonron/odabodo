@@ -1,21 +1,9 @@
 class Admin::ThemesController < ApplicationController
   layout 'admin'
-  before_action :authenticate_admin!
-  # def new
-  #   @theme = Theme.new
-  # end
-
-  # def create
-  #   @theme = current_end_user.themes.new(reference_images_resize(theme_params))
-  #   if @theme.save
-  #     redirect_to theme_path(@theme)
-  #   else
-  #     render :new
-  #   end
-  # end
+  before_action :is_active, only: [:show, :edit]
 
   def index
-    @themes = Theme.all
+    @themes = Theme.where(is_active: true)
     @illustrations = Illustration.all
   end
 
@@ -30,7 +18,8 @@ class Admin::ThemesController < ApplicationController
   end
 
   def update
-    @theme = Theme.find(params[:id])
+    @end_user = EndUser.find(params[:id])
+    @theme = @end_user.themes.find(params[:id])
     if params[:theme][:reference_image_ids]
       params[:theme][:reference_image_ids].each do |reference_image_id|
         reference_image = @theme.reference_images.find(reference_image_id)
@@ -45,12 +34,6 @@ class Admin::ThemesController < ApplicationController
     end
   end
 
-  def destroy
-    theme = Theme.find(params[:id])
-    theme.destroy
-    redirect_to admin_root_path
-  end
-
   def reference_images_resize(params)
     if params[:reference_images]
       params[:reference_images].each do |reference_image|
@@ -60,16 +43,33 @@ class Admin::ThemesController < ApplicationController
     params
   end
 
+  def challenged_image
+    @theme = Theme.find(params[:id])
+    @content = @theme.title
+    if @theme.illustrations
+      @illustrations = @theme.illustrations
+    else
+      @illustrations = Illustration.none
+    end
+  end
+
+  def withdraw
+    theme = Theme.find(params[:id])
+    theme.update(is_active: false ,theme_tag_name: "deleted")
+    flash[:notice] = "お題を削除しました。"
+    redirect_to theme_and_illustration_admin_homes_path
+  end
+
   private
 
   def theme_params
     params.require(:theme).permit(:title, :detail, :theme_tag_name, reference_images: [])
   end
 
-  def is_matching_login_end_user
-    # theme = Theme.find(params[:id])
-    # unless theme.end_user_id == current_end_user.id
-    #   redirect_to theme_path(theme)
-    # end
+  def is_active
+    theme = Theme.find(params[:id])
+    unless theme.is_active == true
+      redirect_to request.referer
+    end
   end
 end
