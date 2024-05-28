@@ -12,13 +12,12 @@
     <%= javascript_pack_tag 'style', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
+  <body class="d-flex flex-column">
     <header>
       <% if end_user_signed_in? %>
         <div>
           <div>
             <%= link_to "<<<<<<<<<<<<お題・イラスト一覧", root_path %>
-            <!--<a href="/#tab_panel-0"><<<<<<<<<<<<お題</a>-->
             <div class="dropdown">
               <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 投稿する
@@ -57,9 +56,9 @@
       <%= yield %>
     </main>
     <footer>
-      <p>© pororonron</p>
+      <div class="row justify-content-center">
+        <p>© pororonron</p>
+      </div>
     </footer>
-    <!--<script src="%= asset_path('jquery.min.js') %>"></script>-->
-    <!--<script src="%= asset_path('style.js') %>"></script>-->
   </body>
 </html>
