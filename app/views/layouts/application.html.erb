@@ -9,10 +9,10 @@
     <script src="https://kit.fontawesome.com/a8ee063013.js" crossorigin="anonymous"></script>
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'style', 'data-turbolinks-track': 'reload' %>
+    <!--<%= javascript_pack_tag 'style', 'data-turbolinks-track': 'reload' %>-->
   </head>
 
-  <body class="d-flex flex-column">
+  <body class="d-flex flex-column bg-color">
     <header>
       <% if end_user_signed_in? %>
         <div>
@@ -56,7 +56,7 @@
       <%= yield %>
     </main>
     <footer>
-      <div class="row justify-content-center">
+      <div class="text-center mt-5">
         <p>© pororonron</p>
       </div>
     </footer>

@@ -1,16 +1,16 @@
 <div class="container">
   <div class="text-center">
     <p class="my-5"><%= image_tag('logo_bg_none2.png') %></p>
-    <div class="">
+    <div>
       <p>描いてほしいお題を出したり、出されたお題に沿ったイラストを</p>
       <p>自由に投稿できるイラストコミュニティサイト</p>
     </div>
-    <div>
-      <%= button_to '新規登録', new_end_user_registration_path, class: "btn btn-info" %>
-      <%= link_to 'ログイン', new_end_user_session_path %>
+    <div class="mt-5">
+      <%= link_to '新規登録', new_end_user_registration_path, class: "btn btn-theme btn-lg mx-3" %>
+      <%= link_to 'ログイン', new_end_user_session_path, class: "btn btn-sub btn-lg mx-3" %>
     </div>
     <div>
-      <%= link_to 'ゲストでログイン', end_users_guest_sign_in_path, method: :post %>
+      <%= link_to 'ゲストでログイン', end_users_guest_sign_in_path, method: :post, class: "btn btn-secondary my-3" %>
     </div>
   </div>
 </div>

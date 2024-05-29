@@ -1,0 +1,21 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  color: #FFF;
+}
+
+.btn-theme {
+  background: #d027c7;
+  color: #FFF;
+}
+
+.btn-sub {
+  background: #0fcac3;
+  color: #FFF;
+}
+
+.bg-color {
+  background: #4124b3;
+  /*34165b*/
+}
