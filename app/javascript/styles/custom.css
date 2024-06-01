@@ -17,5 +17,9 @@
 
 .bg-color {
   background: #4124b3;
-  /*34165b*/
+  /*old→34165b*/
+}
+
+.bold {
+  font-weight: bold;
 }

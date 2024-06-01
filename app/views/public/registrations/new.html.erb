@@ -1,42 +1,53 @@
 <div class="container">
-  <div>
-    <div class="text-center">
-      <p class="mt-5 my-4"><%= image_tag('logo_bg_none2.png') %></p>
-      <h3>新規ユーザー登録</h3>
-    </div>
-    <div class="">
-      <%= form_with model: @end_user, url: end_user_registration_path, local: true do |f| %>
-        <%= render "public/shared/error_messages", resource: resource %>
-      
-        <div class="field">
-          <%= f.label :name %><br />
-          <%= f.text_field :name, autofocus: true, autocomplete: "name" %>
-        </div>
-      
-        <div class="field">
-          <%= f.label :email %><br />
-          <%= f.email_field :email, autocomplete: "email" %>
-        </div>
-      
-        <div class="field">
-          <%= f.label :password %>
-          <% if @minimum_password_length %>
-          <em>(<%= @minimum_password_length %> characters minimum)</em>
-          <% end %><br />
-          <%= f.password_field :password, autocomplete: "new-password" %>
-        </div>
-      
-        <div class="field">
-          <%= f.label :password_confirmation %><br />
-          <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-        </div>
-      
-        <div class="actions">
-          <%= f.submit "Sign up" %>
-        </div>
-      <% end %>
-      
-      <%= render "public/shared/links" %>
+  <div class="row no-gutters">
+    <div class="col-sm-8 mx-auto">
+      <div class="mt-4 mb-3 text-center">
+        <p class="mb-5"><%= image_tag('logo_bg_none2.png') %></p>
+        <p class="btn-theme btn-lg bold">新規ユーザー登録</p>
+      </div>
+      <div class="py-3">
+        <%= form_with model: @end_user, url: end_user_registration_path, local: true do |f| %>
+          <!--<%= render "public/shared/error_messages", resource: resource %>-->
+
+          <div class="field py-3 form-group row justify-content-between">
+            <label class="col-sm-3 col-form-label" for="inputName">ユーザー名</label>
+            <div class="col-sm-8">
+              <%= f.text_field :name, autofocus: true, autocomplete: "name", class: "form-control", id: "inputName" %>
+              <%= render "public/shared/error_messages", resource: resource, attribute: :name %>
+            </div>
+          </div>
+
+          <div class="field py-3 form-group row justify-content-between">
+            <label class="col-sm-3 col-form-label" for="inputEmail">メールアドレス</label>
+            <div class="col-sm-8">
+              <%= f.email_field :email, autocomplete: "email", class: "form-control", id: "inputEmail" %>
+            </div>
+          </div>
+
+          <div class="field py-3 form-group row justify-content-between">
+            <label class="col-sm-3 col-form-label" for="inputPassword">パスワード</label>
+            <div class="col-sm-8">
+              <%= f.password_field :password, autocomplete: "new-password", class: "form-control", id: "inputPassword" %>
+              <% if @minimum_password_length %>
+              <small><%= @minimum_password_length %>文字以上で設定してください</small>
+              <% end %>
+            </div>
+          </div>
+
+          <div class="field py-3 form-group row justify-content-between">
+            <label class="col-sm-3 col-form-label" for="inputPassCfm">パスワード（確認）</label>
+            <div class="col-sm-8">
+              <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control", id: "inputPassCfm" %>
+            </div>
+          </div>
+
+          <div class="actions form-group row justify-content-center">
+            <p><%= f.submit "登録する", class: "form-control btn btn-lg btn-theme mt-3" %></p>
+          </div>
+        <% end %>
+
+        <%= render "public/shared/links" %>
+      </div>
     </div>
   </div>
 </div>
