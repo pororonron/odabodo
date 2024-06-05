@@ -3,31 +3,32 @@
     <div class="col-sm-8 mx-auto">
       <div class="mt-4 mb-3 text-center">
         <p class="mb-5"><%= image_tag('logo_bg_none2.png') %></p>
-        <p class="btn-theme btn-lg bold">新規ユーザー登録</p>
+        <p class="btn-theme btn-lg font-weight-bold">新規ユーザー登録</p>
       </div>
       <div class="py-3">
         <%= form_with model: @end_user, url: end_user_registration_path, local: true do |f| %>
-          <!--<%= render "public/shared/error_messages", resource: resource %>-->
+          <%= render "public/shared/error_messages", resource: resource %>
 
           <div class="field py-3 form-group row justify-content-between">
             <label class="col-sm-3 col-form-label" for="inputName">ユーザー名</label>
             <div class="col-sm-8">
-              <%= f.text_field :name, autofocus: true, autocomplete: "name", class: "form-control", id: "inputName" %>
-              <%= render "public/shared/error_messages", resource: resource, attribute: :name %>
+              <%= f.text_field :name, autofocus: true, autocomplete: "name", class: "form-control", id: "inputName",
+                placeholder: "オダ太郎" %>
             </div>
           </div>
 
           <div class="field py-3 form-group row justify-content-between">
             <label class="col-sm-3 col-form-label" for="inputEmail">メールアドレス</label>
             <div class="col-sm-8">
-              <%= f.email_field :email, autocomplete: "email", class: "form-control", id: "inputEmail" %>
+              <%= f.email_field :email, autocomplete: "email", class: "form-control", id: "inputEmail", placeholder: "メールアドレス" %>
             </div>
           </div>
 
           <div class="field py-3 form-group row justify-content-between">
             <label class="col-sm-3 col-form-label" for="inputPassword">パスワード</label>
             <div class="col-sm-8">
-              <%= f.password_field :password, autocomplete: "new-password", class: "form-control", id: "inputPassword" %>
+              <%= f.password_field :password, autocomplete: "new-password", class: "form-control", id: "inputPassword",
+                placeholder: "半角英数字・記号のみ入力" %>
               <% if @minimum_password_length %>
               <small><%= @minimum_password_length %>文字以上で設定してください</small>
               <% end %>
@@ -37,12 +38,13 @@
           <div class="field py-3 form-group row justify-content-between">
             <label class="col-sm-3 col-form-label" for="inputPassCfm">パスワード（確認）</label>
             <div class="col-sm-8">
-              <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control", id: "inputPassCfm" %>
+              <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control",
+                id: "inputPassCfm", placeholder: "上記パスワードの再入力" %>
             </div>
           </div>
 
           <div class="actions form-group row justify-content-center">
-            <p><%= f.submit "登録する", class: "form-control btn btn-lg btn-theme mt-3" %></p>
+            <p><%= f.submit "登録する", class: "form-control btn btn-lg btn-theme mt-3 font-weight-bold d-flex align-self-center" %></p>
           </div>
         <% end %>
 

@@ -1,6 +1,10 @@
 <h1>「<strong><%= content %></strong>」のキーワード検索結果</h1>
 
-<%= link_to 'タグで再検索', search_tag_admin_homes_path(title: content), method: :get %>
+<% if current_admin %>
+  <%= link_to 'タグで再検索', search_tag_admin_homes_path(title: content), method: :get %>
+<% else %>
+  <%= link_to 'タグで再検索', search_tag_homes_path(title: content), method: :get %>
+<% end %>
 
 <div>
   <ul class="nav nav-tabs tab-area">

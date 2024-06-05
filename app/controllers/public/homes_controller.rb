@@ -7,6 +7,7 @@ class Public::HomesController < ApplicationController
   end
 
   def choice
+    render layout: "begin" 
   end
 
   def search

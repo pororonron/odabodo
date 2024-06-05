@@ -17,9 +17,16 @@
 
 .bg-color {
   background: #4124b3;
-  /*old→34165b*/
 }
 
-.bold {
-  font-weight: bold;
+.bg-obj {
+  background: #5c3fcb;
+}
+
+.navbar-toggler-icon {
+  color: white;
+}
+
+.title-text {
+  font-size: 25px;
 }

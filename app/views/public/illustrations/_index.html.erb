@@ -1,17 +1,21 @@
-<% illustrations.each do |illustration| %>
-  <div>
-    <% if current_admin %>
-      <%= link_to admin_illustration_path(illustration.id) do %>
-        <%= image_tag illustration.challenged_images[0].variant(resize: '250x250').processed %>
-        <%= illustration.title %>
-        <%= illustration.end_user.name %>
-      <% end %>
-    <% else %>
-      <%= link_to illustration_path(illustration.id) do %>
-        <%= image_tag illustration.challenged_images[0].variant(resize: '250x250').processed %>
-        <%= illustration.title %>
-        <%= illustration.end_user.name %>
-      <% end %>
+<div class="container">
+  <div class="d-flex flex-wrap mx-auto">
+    <% illustrations.each do |illustration| %>
+      <div class="row mt-3 mx-2 bg-obj p-2 rounded">
+        <% if current_admin %>
+          <%= link_to admin_illustration_path(illustration.id) do %>
+            <%= image_tag illustration.challenged_images[0].variant(resize: '250x250').processed %>
+            <%= illustration.title %>
+            <%= illustration.end_user.name %>
+          <% end %>
+        <% else %>
+          <%= link_to illustration_path(illustration.id) do %>
+            <%= image_tag illustration.challenged_images[0].variant(resize_to_limit: [200, 200], resize_to_fill: [180, 180]).processed, class: "rounded" %>
+            <p class="m-1 font-weight-bold"><%= illustration.title %></p>
+            <p class="m-1"><%= illustration.end_user.name %></p>
+          <% end %>
+        <% end %>
+      </div>
     <% end %>
   </div>
-<% end %>
+</div>

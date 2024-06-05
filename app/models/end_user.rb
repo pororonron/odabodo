@@ -21,6 +21,22 @@ class EndUser < ApplicationRecord
     length: { maximum: 1000 }
   GUEST_END_USER_EMAIL = "guest@example.com"
 
+  attr_accessor :remember_token
+  
+  def EndUser.new_token
+    SecureRandom.urlsafe_base64
+  end
+  
+  def EndUser.digest(string)
+    cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST : BCrypt::Engine.cost
+    BCrypt::Password.create(string, cost: cost)
+  end
+  
+  def remember
+    self.remember_token = EndUser.new_token
+    update_attribute(:remember_digest, EndUser.digest(remember_token))
+  end
+  
   def self.guest
     find_or_create_by!(email: GUEST_END_USER_EMAIL) do |end_user|
       end_user.password = SecureRandom.urlsafe_base64

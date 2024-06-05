@@ -14,45 +14,79 @@
 
   <body class="d-flex flex-column bg-color">
     <header>
-      <% if end_user_signed_in? %>
-        <div>
-          <div>
-            <%= link_to "<<<<<<<<<<<<お題・イラスト一覧", root_path %>
-            <div class="dropdown">
-              <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                投稿する
-              </button>
-              <ul class="dropdown-menu">
-                <li>
-                  <%= link_to "お題", new_theme_path, class: "dropdown-item" %>
-                </li>
-                <li>
-                  <%= link_to "イラスト", new_illustration_path, class: "dropdown-item" %>
-                </li>
-              </ul>
-            </div>
+      <nav class="navbar navbar-expand-lg">
+        <div class="container my-3">
+          <a class="navbar-brand p-3 align-self-center" href="/"><%= image_tag('logo_bg_none3.png') %></a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="fa-solid fa-bars"></i>
+          </button>
+          <div class="collapse navbar-collapse row justify-content-end" id="navbarNavDropdown">
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item dropdown align-self-center mr-3">
+                <button class="btn btn-theme dropdown-toggle nav-link" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+                  aria-haspopup="true" aria-expanded="false">
+                  投稿する
+                </button>
+                <ul class="dropdown-menu">
+                  <li>
+                    <%= link_to "お題", new_theme_path, class: "dropdown-item" %>
+                  </li>
+                  <li>
+                    <%= link_to "イラスト", new_illustration_path, class: "dropdown-item" %>
+                  </li>
+                </ul>
+              </li>
 
-            <div>
-              <%= link_to end_user_path(current_end_user) do %>
-                <%= image_tag current_end_user.get_profile_image(50, 50) %>
-                <span>マイページ</span>
-              <% end %>
-            </div>
+              <li class="nav-item align-self-center mr-3">
+                <%= link_to "お題・イラスト一覧", root_path, class: "nav-link btn btn-sm btn-secondary" %>
+              </li>
 
+              <li class="nav-item align-self-center mr-2">
+                <%= form_with url: search_homes_path, method: :get, local: true do |f| %>
+                  <div class="input-group">
+                    <input type="text" id="txt-search" class="form-control input-group-prepend" placeholder="キーワードを入力" name="title">
+                    <span class="input-group-btn input-group-append">
+                        <button type="submit" id="btn-search" class="btn btn-secondary">検索</button>
+                    </span>
+                  </div>
+                <% end %>
+              </li>
+
+              <li class="nav-item dropdown align-self-center">
+                <button class="btn nav-link" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+                  aria-haspopup="true" aria-expanded="false">
+                    <%= image_tag current_end_user.get_profile_image(50, 50), class: "rounded-circle" %>
+                </button>
+                <ul class="dropdown-menu">
+                  <% if current_end_user.guest_end_user? %>
+                    <li>
+                      <%= link_to "ゲストページ", end_user_path(current_end_user), class: "dropdown-item" %>
+                    </li>
+                    <li>
+                      <%= link_to "新規登録 / ログイン", destroy_end_user_session_path, method: :delete, class: "dropdown-item" %>
+                    </li>
+                  <% else %>
+                    <li>
+                      <%= link_to "マイページ", end_user_path(current_end_user), class: "dropdown-item" %>
+                    </li>
+                    <li>
+                      <%= link_to "ログアウト", destroy_end_user_session_path, method: :delete, class: "dropdown-item" %>
+                    </li>
+                  <% end %>
+                </ul>
+              </li>
+            </ul>
           </div>
 
-          <div class="search_form">
-            <%= form_with url: search_homes_path, method: :get, local: true do |f| %>
-              <%= f.text_field :title %>
-              <%= f.submit "検索する", class: "btn btn-primary" %>
-            <% end %>
-          </div>
-          <%= link_to 'ログアウト', destroy_end_user_session_path, method: :delete %>
+
         </div>
-      <% end %>
+      </nav>
     </header>
     <main>
-      <%= notice %>
+      <div class="container">
+        <%= notice %>
+      </div>
       <%= yield %>
     </main>
     <footer>
