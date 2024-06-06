@@ -1,0 +1,19 @@
+ja:
+  activerecord:
+    attributes:
+      end_user:
+        name: "ユーザー名"
+        email: "メールアドレス"
+        password: "パスワード"
+        password_confirmation: "確認用パスワード"
+      theme:
+        title: "題名"
+        detail: "詳細"
+        theme_tag_name: ""
+        reference_images: "参照画像"
+      illustration:
+        title: "タイトル"
+        detail: "詳細"
+        illustration_tag_name: ""
+        challenged_images: "投稿画像"
+        theme: "挑戦したお題"

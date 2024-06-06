@@ -52,7 +52,7 @@ class Illustration < ApplicationRecord
 
   def require_illustration_tags
     if @illustration_tag_name.blank?
-      errors.add(:illustration_tag_name, "タグは必須です")
+      errors.add(:illustration_tag_name, "タグ名を入力してください")
     end
   end
 

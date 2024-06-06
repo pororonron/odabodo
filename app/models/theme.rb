@@ -47,7 +47,7 @@ class Theme < ApplicationRecord
 
   def require_theme_tags
     if @theme_tag_name.blank?
-      errors.add(:theme_tag_name, "タグは必須です")
+      errors.add(:theme_tag_name, "タグ名を入力してください")
     end
   end
 

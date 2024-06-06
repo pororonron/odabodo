@@ -1,28 +1,59 @@
-<h1>お題を投稿する</h1>
-<% if @theme.errors.present? %>
-  <% @theme.errors.full_messages.each do |msg| %>
-    <%= msg %>
-  <% end %>
-<% end %>
-<div>
-  <%= form_with model: @theme, local: true do |f| %>
-    <div>
-      <label for="inputTitle", class="mb-2">題名</label>
-      <%= f.text_field :title, id: "inputTitle", class: "form-control" %>
+<div class="container">
+  <div class="row no-gutters">
+    <div class="col-sm-8 mx-auto">
+      <div class="my-3 text-center">
+        <h3 class="font-weight-bold mb-4">お題を投稿する</h3>
+      </div>
+      <div class="bg-form rounded-lg px-4 py-4 pt-5">
+        <%= form_with model: @theme, local: true do |f| %>
+          <div class="field form-group row justify-content-between mb-5 px-4">
+            <label for="inputTitle", class="col-sm-2 col-form-label">
+              題名
+              <span class="badge badge-info">必須</span>
+            </label>
+            <div class="col-sm-10">
+              <%= f.text_field :title, id: "inputTitle", class: "form-control" %>
+              <p><small><%= render 'layouts/error_message', f: f, attr: :title %></small></p>
+            </div>
+          </div>
+
+          <div class="field form-group row justify-content-between mb-5 px-4">
+            <label for="inputDetail", class="col-sm-2 col-form-label">
+              詳細
+            </label>
+            <div class="col-sm-10">
+              <%= f.text_area :detail, id: "inputDetail", class: "form-control", rows: "5" %>
+              <p><small><%= render 'layouts/error_message', f: f, attr: :detail %></small></p>
+            </div>
+          </div>
+
+          <div class="field form-group row justify-content-between mb-5 px-4">
+            <label for="inputTag", class="col-sm-2 col-form-label">
+              タグ
+              <span class="badge badge-info">必須</span>
+            </label>
+            <div class="col-sm-10">
+              <%= f.text_field :theme_tag_name, id: "inputTag", class: "form-control" %>
+              <small>※ 複数のタグを設定したいときは、タグの間を半角スペースで区切ってください</small>
+              <p><small><%= render 'layouts/error_message', f: f, attr: :theme_tag_name %></small></p>
+            </div>
+          </div>
+
+          <div class="field form-group row d-flex justify-content-between mb-5 px-4">
+            <p class="col-sm-5 col-form-label">参照画像を選択(複数でも可)</p>
+            <div class="col-sm-7">
+              <%= f.file_field :reference_images, accept: "image/*", multiple: true, class: "form-control py-1 px-2" %>
+              <small>※ 選択時にキャンセルを押すと画像をリセットできます</small>
+              <p><small><%= render 'layouts/error_message', f: f, attr: :reference_images %></small></p>
+            </div>
+          </div>
+
+          <div class="actions form-group row justify-content-center">
+            <p><%= f.submit "投稿する", class: "form-control btn btn-lg btn-theme mt-3 font-weight-bold" %></p>
+          </div>
+
+        <% end %>
+      </div>
     </div>
-    <div>
-      <label for="inputDetail", class="mt-3 mb-2">詳細</label>
-      <%= f.text_area :detail, id: "inputDetail", class: "form-control" %>
-    </div>
-    <div>
-      <label for="inputTag", class="mt-3 mb-2">タグ</label>
-      <%= f.text_field :theme_tag_name, id: "inputTag", class: "form-control" %>
-    </div>
-    <div>
-      <p>参照画像選択</p>
-      <p>ファイル複数選択：</p>
-      <%= f.file_field :reference_images, accept: "image/*", multiple: true %>
-    </div>
-    <%= f.submit '投稿する', class: "btn btn-success my-3" %>
-  <% end %>
+  </div>
 </div>

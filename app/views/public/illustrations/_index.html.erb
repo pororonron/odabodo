@@ -1,7 +1,7 @@
 <div class="container">
   <div class="d-flex flex-wrap mx-auto">
     <% illustrations.each do |illustration| %>
-      <div class="row mt-3 mx-2 bg-obj p-2 rounded">
+      <div class="row mt-3 mx-2 bg-form p-2 rounded">
         <% if current_admin %>
           <%= link_to admin_illustration_path(illustration.id) do %>
             <%= image_tag illustration.challenged_images[0].variant(resize: '250x250').processed %>

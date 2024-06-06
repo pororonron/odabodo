@@ -19,7 +19,7 @@
   background: #4124b3;
 }
 
-.bg-obj {
+.bg-form {
   background: #5c3fcb;
 }
 
@@ -29,4 +29,8 @@
 
 .title-text {
   font-size: 25px;
+}
+
+.text-normal>option {
+  color: #212529;
 }

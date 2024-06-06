@@ -1,0 +1,3 @@
+<% if f.object.errors[attr].any? %>
+  ※ <%= t("activerecord.attributes.#{f.object.class.to_s.underscore}.#{attr.to_s}") %> <%= f.object.errors[attr].first %>
+<% end %>

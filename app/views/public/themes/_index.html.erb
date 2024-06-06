@@ -1,6 +1,6 @@
 <div class="mx-5">
   <% themes.each do |theme| %>
-    <div class="row my-3 bg-obj p-2 rounded">
+    <div class="row my-3 bg-form p-2 rounded">
       <% if current_admin %>
         <%= link_to admin_theme_path(theme.id) do %>
           <%= image_tag theme.end_user.get_profile_image(50, 50), class: "rounded-circle" %>
