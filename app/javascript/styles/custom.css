@@ -23,6 +23,10 @@
   background: #5c3fcb;
 }
 
+.bg-form-2 {
+  background: #8772d7;
+}
+
 .navbar-toggler-icon {
   color: white;
 }
@@ -33,4 +37,12 @@
 
 .text-normal>option {
   color: #212529;
+}
+
+.text-link {
+  color: #48dcef;
+}
+
+.text-link:hover {
+  color: #0fcac3;
 }

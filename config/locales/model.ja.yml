@@ -17,3 +17,5 @@ ja:
         illustration_tag_name: ""
         challenged_images: "投稿画像"
         theme: "挑戦したお題"
+      theme_comment:
+        comment: "コメント"
