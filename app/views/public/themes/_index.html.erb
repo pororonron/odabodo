@@ -1,19 +1,21 @@
-<div class="mx-5">
-  <% themes.each do |theme| %>
-    <div class="row my-3 bg-form p-2 rounded">
-      <% if current_admin %>
-        <%= link_to admin_theme_path(theme.id) do %>
-          <%= image_tag theme.end_user.get_profile_image(50, 50), class: "rounded-circle" %>
-          <%= theme.title %>
-        <% end %>
-      <% else %>
-        <%= link_to theme_path(theme.id), class: "d-flex" do %>
-          <%= image_tag theme.end_user.get_profile_image(40, 40), class: "rounded-circle mr-3 aligh-self-center" %>
-          <span class="title-text align-self-center">
+<div class="container">
+  <div class="mx-5">
+    <% themes.each do |theme| %>
+      <div class="row my-3 bg-form p-2 rounded">
+        <% if current_admin %>
+          <%= link_to admin_theme_path(theme.id) do %>
+            <%= image_tag theme.end_user.get_profile_image(50, 50), class: "rounded-circle" %>
             <%= theme.title %>
-          </span>
+          <% end %>
+        <% else %>
+          <%= link_to theme_path(theme.id), class: "d-flex" do %>
+            <%= image_tag theme.end_user.get_profile_image(40, 40), class: "rounded-circle mr-3 aligh-self-center" %>
+            <span class="title-text align-self-center">
+              <%= theme.title %>
+            </span>
+          <% end %>
         <% end %>
-      <% end %>
-    </div>
-  <% end %>
+      </div>
+    <% end %>
+  </div>
 </div>

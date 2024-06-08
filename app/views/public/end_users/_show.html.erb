@@ -1,63 +1,65 @@
-<%= render "public/end_users/profile", end_user: @end_user %>
-
-<div>
-  <% if current_admin %>
-    <%= link_to follows_admin_end_user_path(end_user) do %>
-      <span><strong><%= end_user.followers.count %></strong>フォロー中 </span>
-      <span><strong><%= end_user.follows.count %></strong>フォロワー</span>
+<div class="container">
+  <%= render "public/end_users/profile", end_user: @end_user %>
+  
+  <div>
+    <% if current_admin %>
+      <%= link_to follows_admin_end_user_path(end_user) do %>
+        <span><strong><%= end_user.followers.count %></strong>フォロー中 </span>
+        <span><strong><%= end_user.follows.count %></strong>フォロワー</span>
+      <% end %>
+    <% else %>
+      <%= link_to follows_end_user_path(end_user) do %>
+        <span><strong><%= end_user.followers.count %></strong>フォロー中 </span>
+        <span><strong><%= end_user.follows.count %></strong>フォロワー</span>
+      <% end %>
     <% end %>
-  <% else %>
-    <%= link_to follows_end_user_path(end_user) do %>
-      <span><strong><%= end_user.followers.count %></strong>フォロー中 </span>
-      <span><strong><%= end_user.follows.count %></strong>フォロワー</span>
-    <% end %>
-  <% end %>
-</div>
-
-<div>
-  <ul class="nav nav-tabs tab-area">
-    <li class="nav-item">
-      <button class="nav-link active" data-toggle="tab" data-target="#tabTheme" type="button">
-        投稿お題
-      </button>
-    </li>
-    <li class="nav-item">
-      <button class="nav-link" data-toggle="tab" data-target="#tabIllustration" type="button">
-        投稿イラスト
-      </button>
-    </li>
-    <li class="nav-item">
-      <button class="nav-link" data-toggle="tab" data-target="#tabFavorite" type="button">
-        いいね
-      </button>
-    </li>
-    <li class="nav-item">
-      <button class="nav-link" data-toggle="tab" data-target="#tabBookmark" type="button">
-        ブックマーク
-      </button>
-    </li>
-    <li class="nav-item">
-      <button class="nav-link" data-toggle="tab" data-target="#tabChallenge" type="button">
-        挑戦中のお題
-      </button>
-    </li>
-  </ul>
-
-  <div class="tab-content">
-    <div id="tabTheme" class="tab-pane content_area active">
-      <%= render "public/themes/index", themes: @themes %>
-    </div>
-    <div id="tabIllustration" class="tab-pane content_area">
-      <%= render "public/illustrations/index", illustrations: @illustrations %>
-    </div>
-    <div id="tabFavorite" class="tab-pane content_area">
-      <%= render "public/illustrations/index", illustrations: @favorite_illustrations %>
-    </div>
-    <div id="tabBookmark" class="tab-pane content_area">
-      <%= render "public/illustrations/index", illustrations: @bookmark_illustrations %>
-    </div>
-    <div id="tabChallenge" class="tab-pane content_area">
-      <%= render "public/themes/index", themes: @challenge_themes %>
+  </div>
+  
+  <div>
+    <ul class="nav nav-tabs tab-area">
+      <li class="nav-item">
+        <button class="nav-link active" data-toggle="tab" data-target="#tabTheme" type="button">
+          投稿お題
+        </button>
+      </li>
+      <li class="nav-item">
+        <button class="nav-link" data-toggle="tab" data-target="#tabIllustration" type="button">
+          投稿イラスト
+        </button>
+      </li>
+      <li class="nav-item">
+        <button class="nav-link" data-toggle="tab" data-target="#tabFavorite" type="button">
+          いいね
+        </button>
+      </li>
+      <li class="nav-item">
+        <button class="nav-link" data-toggle="tab" data-target="#tabBookmark" type="button">
+          ブックマーク
+        </button>
+      </li>
+      <li class="nav-item">
+        <button class="nav-link" data-toggle="tab" data-target="#tabChallenge" type="button">
+          挑戦中のお題
+        </button>
+      </li>
+    </ul>
+  
+    <div class="tab-content">
+      <div id="tabTheme" class="tab-pane content_area active">
+        <%= render "public/themes/index", themes: @themes %>
+      </div>
+      <div id="tabIllustration" class="tab-pane content_area">
+        <%= render "public/illustrations/index", illustrations: @illustrations %>
+      </div>
+      <div id="tabFavorite" class="tab-pane content_area">
+        <%= render "public/illustrations/index", illustrations: @favorite_illustrations %>
+      </div>
+      <div id="tabBookmark" class="tab-pane content_area">
+        <%= render "public/illustrations/index", illustrations: @bookmark_illustrations %>
+      </div>
+      <div id="tabChallenge" class="tab-pane content_area">
+        <%= render "public/themes/index", themes: @challenge_themes %>
+      </div>
     </div>
   </div>
 </div>

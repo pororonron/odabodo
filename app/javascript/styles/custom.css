@@ -27,15 +27,15 @@
   background: #8772d7;
 }
 
-.navbar-toggler-icon {
-  color: white;
-}
-
 .title-text {
   font-size: 25px;
 }
 
-.text-normal>option {
+.text-normal {
+  color: #212529;
+}
+
+.text-normal option {
   color: #212529;
 }
 
