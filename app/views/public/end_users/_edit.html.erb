@@ -1,33 +1,69 @@
-<h2>プロフィール編集</h2>
+<div class="container">
+  <div class="row no-gutters">
+    <div class="col-sm-8 mx-auto">
+      <div class="my-3 text-center">
+        <h3 class="font-weight-bold mb-4">プロフィール編集</h3>
+      </div>
 
-<% if current_admin %>
-  <%= form_with model: end_user, url: admin_end_user_path, local: true do |f| %>
-    <label for="inputImage">プロフィール画像</label>
-    <%= f.file_field :profile_image, placeholder: "プロフィール画像", accept: "image/*" %>
-    <label for="inputName">ユーザー名</label>
-    <%= f.text_field :name, id: "inputName", placeholder: "名前" %>
-    <label for="inputSelfIntroduction">自己紹介文</label>
-    <%= f.text_area :self_introduction, id: "inputSelfIntroduction", placeholder: "自己紹介文を入力してください" %>
+      <div class="bg-form rounded-lg px-4 py-4 pt-5">
+        <% if current_admin %>
+          <%= form_with model: end_user, url: admin_end_user_path, local: true do |f| %>
+            <label for="inputImage">プロフィール画像</label>
+            <%= f.file_field :profile_image, placeholder: "プロフィール画像", accept: "image/*" %>
+            <label for="inputName">ユーザー名</label>
+            <%= f.text_field :name, id: "inputName", placeholder: "名前" %>
+            <label for="inputSelfIntroduction">自己紹介文</label>
+            <%= f.text_area :self_introduction, id: "inputSelfIntroduction", placeholder: "自己紹介文を入力してください" %>
 
-    <p><%= f.submit "変更を保存する", class: "btn btn-success" %></p>
-  <% end %>
+            <p><%= f.submit "変更を保存する", class: "btn btn-success" %></p>
+          <% end %>
 
-  <p><%= link_to "キャンセル", admin_end_user_path(end_user), class: "btn btn-secondary" %></p>
-  <p><%= link_to "退会する", confirm_admin_end_user_path %></p>
+          <p><%= link_to "キャンセル", admin_end_user_path(end_user), class: "btn btn-secondary" %></p>
+          <p><%= link_to "退会する", confirm_admin_end_user_path %></p>
 
-<% else %>
+        <% else %>
 
-  <%= form_with model: end_user, local: true do |f| %>
-    <label for="inputImage">プロフィール画像</label>
-    <%= f.file_field :profile_image, placeholder: "プロフィール画像", accept: "image/*" %>
-    <label for="inputName">ユーザー名</label>
-    <%= f.text_field :name, id: "inputName", placeholder: "名前" %>
-    <label for="inputSelfIntroduction">自己紹介文</label>
-    <%= f.text_area :self_introduction, id: "inputSelfIntroduction", placeholder: "自己紹介文を入力してください" %>
+          <%= form_with model: end_user, local: true do |f| %>
+            <div class="field form-group row justify-content-between mb-5 px-4">
+              <label for="inputImage", class="col-sm-3 col-form-label">プロフィール画像</label>
+              <div class="col-sm-8">
+                <%= f.file_field :profile_image, placeholder: "プロフィール画像", accept: "image/*", class: "form-control py-1 px-2" %>
+                <small>※ 選択時にキャンセルを押すと画像をリセットできます</small>
+                <p><small><%= render 'layouts/error_message', f: f, attr: :profile_image %></small></p>
+              </div>
+            </div>
 
-    <p><%= f.submit "変更を保存する", class: "btn btn-success" %></p>
-  <% end %>
+            <div class="field py-3 form-group row justify-content-between mb-5 px-4">
+              <label class="col-sm-3 col-form-label" for="inputName">
+                ユーザー名
+                <span class="badge badge-info">必須</span>
+              </label>
+              <div class="col-sm-8">
+                <%= f.text_field :name, id: "inputName", class: "form-control", id: "inputName",
+                placeholder: "オダ太郎" %>
+                <p><small><%= render 'layouts/error_message', f: f, attr: :name %></small></p>
+              </div>
+            </div>
+            
+            <div class="field py-3 form-group row justify-content-between mb-5 px-4">
+              <label for="inputSelfIntroduction", class="col-sm-3 col-form-label">自己紹介文</label>
+              <div class="col-sm-8">
+                <%= f.text_area :self_introduction, id: "inputSelfIntroduction", placeholder: "自己紹介文を入力してください",
+                  class: "form-control" %>
+              </div>
+            </div>
 
-  <p><%= link_to "キャンセル", end_user_path(current_end_user), class: "btn btn-secondary" %></p>
-  <p><%= link_to "退会する", confirm_end_users_path %></p>
-<% end %>
+            <div class="actions form-group row justify-content-center">
+              <div><%= f.submit "変更を保存する", class: "form-control btn btn-lg btn-theme mt-4 font-weight-bold" %></div>
+            </div>
+          <% end %>
+
+          <div class="text-center mt-3 pb-4">
+            <p><%= link_to "編集をやめる", end_user_path(current_end_user), class: "btn btn-lg btn-secondary font-weight-bold mb-5" %></p>
+            <p><%= link_to "退会する", confirm_end_users_path, class: "text-link" %></p>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

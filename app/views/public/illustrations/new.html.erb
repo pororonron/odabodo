@@ -14,7 +14,7 @@
             </label>
             <div class="col-sm-9">
               <%= f.collection_select :theme_id, current_end_user.challenge_themes.theme.map { |theme_id| Theme.find(theme_id) },
-                :id, :title, { include_blank: "挑戦中のお題から選択" }, { id: "SelectTheme", class: "form-control text-normal" } %>
+                :id, :title, { include_blank: "挑戦中のお題から選択" }, { id: "SelectTheme", class: "form-control text-form-field" } %>
               <p><small><%= render 'layouts/error_message', f: f, attr: :theme %></small></p>
             </div>
           </div>

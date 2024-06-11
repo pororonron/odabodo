@@ -1,25 +1,35 @@
-<h1>タグ「<strong><%= content %></strong>」の検索結果</h1>
+<div class="container">
+  <div class="d-flex">
+    <p class="h3 align-self-center mb-0 mr-3">タグ「<strong><%= content %></strong>」の検索結果</p>
 
-<div>
-  <ul class="nav nav-tabs tab-area">
-    <li class="nav-item">
-      <button class="nav-link active" data-toggle="tab" data-target="#tabTheme" type="button">
-        お題
-      </button>
-    </li>
-    <li class="nav-item">
-      <button class="nav-link" data-toggle="tab" data-target="#tabIllustration" type="button">
-        イラスト
-      </button>
-    </li>
-  </ul>
+    <% if current_admin %>
+      <%= link_to 'キーワードで検索', search_admin_homes_path(title: content), method: :get %>
+    <% else %>
+      <%= link_to 'キーワードで検索', search_homes_path(title: content), method: :get, class: "btn btn-theme align-self-center" %>
+    <% end %>
+  </div>
 
-  <div class="tab-content">
-    <div id="tabTheme" class="tab-pane content_area active">
-      <%= render "public/themes/index", themes: @themes %>
-    </div>
-    <div id="tabIllustration" class="tab-pane content_area">
-      <%= render "public/illustrations/index", illustrations: @illustrations %>
+  <div class="mt-4">
+    <ul class="nav nav-tabs tab-area">
+      <li class="nav-item">
+        <button class="nav-link active" data-toggle="tab" data-target="#tabTheme" type="button">
+          お題
+        </button>
+      </li>
+      <li class="nav-item">
+        <button class="nav-link" data-toggle="tab" data-target="#tabIllustration" type="button">
+          イラスト
+        </button>
+      </li>
+    </ul>
+
+    <div class="tab-content">
+      <div id="tabTheme" class="tab-pane content_area active">
+        <%= render "public/themes/index", themes: @themes %>
+      </div>
+      <div id="tabIllustration" class="tab-pane content_area">
+        <%= render "public/illustrations/index", illustrations: @illustrations %>
+      </div>
     </div>
   </div>
 </div>

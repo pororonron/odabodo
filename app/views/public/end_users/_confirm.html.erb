@@ -1,11 +1,23 @@
-<h1>本当に退会しますか？</h1>
-<p>退会すると、登録情報やこれまでの投稿履歴が閲覧できなくなります。</p>
-<p>退会する場合は、「退会する」をクリックしてください。</p>
+<div class="container">
+  <div class="row no-gutters">
+    <div class="col-sm-8 mx-auto">
+      <div class="my-3 text-center bg-form p-4 rounded">
+        <h3 class="font-weight-bold mb-4">本当に退会しますか？</h3>
+        <div class="my-5">
+          <p>退会すると、登録情報やこれまでの投稿履歴が閲覧できなくなります。</p>
+          <p>退会する場合は、「退会する」をクリックしてください。</p>
+        </div>
 
-<% if current_admin %>
-  <%= link_to "退会をしない", admin_end_user_path(end_user), class: "btn btn-success" %>
-  <%= link_to "退会する", withdraw_admin_end_user_path(end_user), method: :patch, class: "btn btn-danger", "data-confirm" => "本当に削除しますか？" %>
-<% else %>
-  <%= link_to "退会をしない", end_user_path(current_end_user), class: "btn btn-success" %>
-  <%= link_to "退会する", withdraw_end_users_path, method: :patch, class: "btn btn-danger", "data-confirm" => "本当に削除しますか？" %>
-<% end %>
+        <div>
+          <% if current_admin %>
+            <%= link_to "退会をしない", admin_end_user_path(end_user), class: "btn btn-success" %>
+            <%= link_to "退会する", withdraw_admin_end_user_path(end_user), method: :patch, class: "btn btn-danger", "data-confirm" => "本当に削除しますか？" %>
+          <% else %>
+            <%= link_to "退会をしない", end_user_path(current_end_user), class: "btn btn-sub font-weight-bold mx-3" %>
+            <%= link_to "退会する", withdraw_end_users_path, method: :patch, class: "btn btn-theme font-weight-bold mx-3", "data-confirm" => "本当に削除しますか？" %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

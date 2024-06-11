@@ -13,12 +13,12 @@
         <%= link_to "プロフィール編集", edit_end_user_path, class: "text-link" %>
       <% else %>
         <% if current_end_user.following?(end_user) %>
-          <p>
-            <%= link_to "フォロー中", end_user_follow_relationships_path(end_user.id), method: :delete, class: "btn btn-success" %>
+          <p class="mb-0">
+            <%= link_to "フォロー中", end_user_follow_relationships_path(end_user.id), method: :delete, class: "btn btn-sub" %>
           </p>
         <% else %>
-          <p>
-            <%= link_to "フォローする", end_user_follow_relationships_path(end_user.id), method: :post, class: "btn btn-success" %>
+          <p class="mb-0">
+            <%= link_to "フォローする", end_user_follow_relationships_path(end_user.id), method: :post, class: "btn btn-theme" %>
           </p>
         <% end %>
       <% end %>

@@ -11,7 +11,7 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
+  <body class="d-flex flex-column bg-color">
     <header>
       <% if admin_signed_in? %>
         <div>
@@ -23,10 +23,15 @@
 
           <div class="search_form">
             <%= form_with url: search_admin_homes_path, method: :get, local: true do |f| %>
-              <%= f.text_field :title %>
-              <%= f.submit "検索する", class: "btn btn-primary" %>
+              <div class="input-group">
+                <input type="text" id="txt-search" class="form-control input-group-prepend" placeholder="キーワードを入力" name="title">
+                <span class="input-group-btn input-group-append">
+                    <button type="submit" id="btn-search" class="btn btn-secondary">検索</button>
+                </span>
+              </div>
             <% end %>
           </div>
+
           <%= link_to 'ログアウトする', destroy_admin_session_path, method: :delete %>
         </div>
       <% end %>

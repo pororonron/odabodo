@@ -31,11 +31,11 @@
   font-size: 25px;
 }
 
-.text-normal {
+.text-form-field {
   color: #212529;
 }
 
-.text-normal option {
+.text-form-field option {
   color: #212529;
 }
 

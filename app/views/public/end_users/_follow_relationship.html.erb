@@ -1,25 +1,29 @@
-<table>
-  <tbody>
+<div class="container">
+  <div class="mx-5">
     <% end_users.each do |end_user| %>
-      <tr>
-        <%= link_to end_user_path(end_user) do %>
-          <%= image_tag end_user.get_profile_image(50, 50) %>
-          <p><%= end_user.name %>さん</p>
-          <p><%= end_user.self_introduction %></p>
+      <div class="my-3 bg-form p-2 rounded d-flex justify-content-between">
+          <%= link_to end_user_path(end_user), { class: "d-flex" } do %>
+            <%= image_tag end_user.get_profile_image(50, 50), class: "rounded-circle align-self-center px-2" %>
+            <div class="align-self-center pl-3">
+              <p class="h4 mb-0"><strong><%= end_user.name %> </strong>さん</p>
+              <p class="mb-0"><%= end_user.self_introduction %></p>
+            </div>
+          <% end %>
+
           <% unless current_admin %>
             <% if end_user == current_end_user %>
             <% elsif current_end_user.following?(end_user) %>
-              <p>
-                <%= link_to "フォロー中", end_user_follow_relationships_path(end_user.id), method: :delete, class: "btn btn-success" %>
-              </p>
+              <span class="align-self-center pr-0 col-sm-2 text-center">
+                <%= link_to "フォロー中", end_user_follow_relationships_path(end_user.id), method: :delete, class: "btn btn-sub ml-auto" %>
+              </span>
             <% else %>
-              <p>
-                <%= link_to "フォローする", end_user_follow_relationships_path(end_user.id), method: :post, class: "btn btn-success" %>
-              </p>
+              <span class="align-self-center pr-0 col-sm-2 text-center">
+                <%= link_to "フォローする", end_user_follow_relationships_path(end_user.id), method: :post, class: "btn btn-theme ml-auto" %>
+              </span>
             <% end %>
           <% end %>
-        <% end %>
-      </tr>
+
+      </div>
     <% end %>
-  </tbody>
-</table>
+  </div>
+</div>

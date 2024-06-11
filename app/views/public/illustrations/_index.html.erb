@@ -10,7 +10,8 @@
           <% end %>
         <% else %>
           <%= link_to illustration_path(illustration.id) do %>
-            <%= image_tag illustration.challenged_images[0].variant(resize_to_limit: [200, 200], resize_to_fill: [180, 180]).processed, class: "rounded" %>
+            <%= image_tag illustration.challenged_images[0].variant(resize_to_limit: [200, 200],
+            resize_to_fill: [180, 180]).processed, class: "rounded" %>
             <p class="m-1 font-weight-bold"><%= illustration.title %></p>
             <p class="m-1"><%= illustration.end_user.name %></p>
           <% end %>
