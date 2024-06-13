@@ -21,6 +21,8 @@ class Public::EndUsersController < ApplicationController
   end
 
   def update
+    @end_user = current_end_user
+
     if current_end_user.update(end_user_params)
       redirect_to end_user_path(current_end_user)
     else
