@@ -44,12 +44,13 @@
                 <p><small><%= render 'layouts/error_message', f: f, attr: :name %></small></p>
               </div>
             </div>
-            
+
             <div class="field py-3 form-group row justify-content-between mb-5 px-4">
               <label for="inputSelfIntroduction", class="col-sm-3 col-form-label">自己紹介文</label>
               <div class="col-sm-8">
                 <%= f.text_area :self_introduction, id: "inputSelfIntroduction", placeholder: "自己紹介文を入力してください",
                   class: "form-control" %>
+                <p><small><%= render 'layouts/error_message', f: f, attr: :self_introduction %></small></p>
               </div>
             </div>
 
