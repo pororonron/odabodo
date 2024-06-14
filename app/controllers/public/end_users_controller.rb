@@ -1,5 +1,6 @@
 class Public::EndUsersController < ApplicationController
   before_action :ensure_guest_end_user, only: [:edit]
+  before_action :is_active, only: [:show, :edit]
 
   def show
     @end_user = EndUser.find(params[:id])
@@ -72,6 +73,13 @@ class Public::EndUsersController < ApplicationController
     if @end_user.guest_end_user?
       redirect_to end_user_path(current_end_user),
         notice: "ゲストユーザーはプロフィール編集画面へ遷移できません。"
+    end
+  end
+
+  def is_active
+    end_user = EndUser.find(params[:id])
+    unless end_user.is_active == true
+      redirect_to root_path
     end
   end
 end
