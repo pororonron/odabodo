@@ -12,7 +12,7 @@
             <% end %>
           </div>
 
-          <div class="py-3 align-self-center">
+          <div class="py-3 align-self-center col-auto">
             <% if @illustration.end_user_id == current_end_user.id %>
               <%= link_to 'イラスト内容を編集する', edit_illustration_path(@illustration), class: "text-link" %>
             <% end %>
@@ -23,7 +23,7 @@
           <div class="mt-5 h5 mx-3">
             <% if @illustration.theme.is_active == true %>
               <%= link_to theme_path(@illustration.theme_id), class: "d-flex" do %>
-                <p class="text-link">お題： </p>
+                <p class="text-link col-sm-2">お題： </p>
                 <p class="ml-4"><strong class="text-link"><%= @illustration.theme.title %></strong></p>
               <% end %>
             <% else %>

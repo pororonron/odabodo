@@ -46,3 +46,19 @@
 .text-link:hover {
   color: #0fcac3;
 }
+
+.text-hidden {
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  width: 170px;
+}
+
+.text-hidden-follow {
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  width: 720px;
+}

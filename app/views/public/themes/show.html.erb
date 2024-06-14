@@ -12,7 +12,7 @@
             <% end %>
           </div>
 
-          <div class="py-3 align-self-center">
+          <div class="py-3 align-self-center col-auto">
             <% if @theme.end_user_id == current_end_user.id %>
               <%= link_to 'お題内容を編集する', edit_theme_path(@theme), class: "text-link" %>
             <% end %>
@@ -21,7 +21,7 @@
 
         <div class="px-3">
           <div class="d-flex mt-5 h4 mx-3">
-            <p>お題： </p>
+            <p class="col-sm-2">お題： </p>
             <p class="ml-4"><strong><%= @theme.title %></strong></p>
           </div>
           <p class="border-bottom border-white"></p>
@@ -70,7 +70,9 @@
         <%= form_with model: [@theme, @theme_comment], local: true do |f| %>
           <div class="d-flex mb-5 justify-content-between">
             <%= image_tag current_end_user.get_profile_image(50, 50), class: "rounded-circle align-self-center" %>
-            <%= f.text_area :comment, rows: '2', placeholder: 'ここにコメントを入力', class: "form-control col-sm-9 mx-2 align-self-center" %>
+            <div class="col-sm-9 mx-2 align-self-center">
+            <%= f.text_area :comment, rows: '2', placeholder: 'ここにコメントを入力', class: "form-control" %>
+            </div>
             <%= f.submit '送信', class: "btn btn-theme col-sm-1 align-self-center" %>
           </div>
         <% end %>
@@ -80,7 +82,7 @@
             <%= link_to end_user_path(theme_comment.end_user) do %>
               <%= image_tag theme_comment.end_user.get_profile_image(50, 50), class: "rounded-circle mr-3" %>
             <% end %>
-            
+
             <div class="col-sm-10">
               <p class="mb-0"><small><%= theme_comment.end_user.name %> さん</small></p>
               <p><%= theme_comment.comment %><p>

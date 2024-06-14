@@ -6,20 +6,23 @@
             <%= image_tag end_user.get_profile_image(50, 50), class: "rounded-circle align-self-center px-2" %>
             <div class="align-self-center pl-3">
               <p class="h4 mb-0"><strong><%= end_user.name %> </strong>さん</p>
-              <p class="mb-0"><%= end_user.self_introduction %></p>
+              <p class="mb-0 text-hidden-follow"><%= end_user.self_introduction %></p>
             </div>
           <% end %>
 
           <% unless current_admin %>
             <% if end_user == current_end_user %>
-            <% elsif current_end_user.following?(end_user) %>
-              <span class="align-self-center pr-0 col-sm-2 text-center">
-                <%= link_to "フォロー中", end_user_follow_relationships_path(end_user.id), method: :delete, class: "btn btn-sub ml-auto" %>
-              </span>
+            <% elsif end_user.guest_end_user? %>
             <% else %>
-              <span class="align-self-center pr-0 col-sm-2 text-center">
-                <%= link_to "フォローする", end_user_follow_relationships_path(end_user.id), method: :post, class: "btn btn-theme ml-auto" %>
-              </span>
+              <% if current_end_user.following?(end_user) %>
+                <span class="align-self-center pr-0 col-sm-2 text-center">
+                  <%= link_to "フォロー中", end_user_follow_relationships_path(end_user.id), method: :delete, class: "btn btn-sub ml-auto" %>
+                </span>
+              <% else %>
+                <span class="align-self-center pr-0 col-sm-2 text-center">
+                  <%= link_to "フォローする", end_user_follow_relationships_path(end_user.id), method: :post, class: "btn btn-theme ml-auto" %>
+                </span>
+              <% end %>
             <% end %>
           <% end %>
 
