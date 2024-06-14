@@ -12,9 +12,9 @@ class Public::HomesController < ApplicationController
   def search
     @content = params["title"]
     if params[:title].present?
-      @themes = Theme.where('title LIKE?', "%#{params[:title]}%")
+      @themes = Theme.where('title LIKE ? AND is_active = ?', "%#{params[:title]}%", true)
       @illustrations = Illustration.where('title LIKE?', "%#{params[:title]}%")
-      @end_users = EndUser.where('name LIKE?', "%#{params[:title]}%")
+      @end_users = EndUser.where('name LIKE ? AND is_active = ?', "%#{params[:title]}%", true)
     else
       @themes = Theme.none
       @illustrations = Illustration.none

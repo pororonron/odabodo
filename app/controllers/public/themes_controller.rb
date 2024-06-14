@@ -1,5 +1,5 @@
 class Public::ThemesController < ApplicationController
-  before_action :is_active, only: [:show, :edit]
+  before_action :is_active, only: [:show, :edit, :challenged_image]
   def new
     @theme = Theme.new
   end
