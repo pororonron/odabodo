@@ -53,9 +53,9 @@ Theme.find_or_create_by!(id: 2) do |theme|
   theme.title = "魔女"
   theme.detail = "サンプルの投稿です。魔女のコスプレをした女の子のイラストが見たいです。画像のように大きめのとんがりボウシをかぶっているとよろこびます。"
   theme.is_active = true
-  theme.theme_tag_name = "魔女 女の子"
+  theme.theme_tag_name = "魔女"
   theme.reference_images = nil
-  # theme.reference_images.attach(io: File.open("#{Rails.root}/db/fixtures/sample_reference_image1.jpg"), filename: "sample_reference_image1.jpg")
+  theme.reference_images.attach(io: File.open("#{Rails.root}/db/fixtures/sample_reference_image1.jpg"), filename: "sample_reference_image1.jpg")
   # theme.reference_images = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample_reference_image1.jpg"), filename:"sample_reference_image1.jpg")
   theme.end_user = olivia
 end
