@@ -33,6 +33,7 @@
                 <p class="mt-5 mb-4">投稿済みの画像(削除したい画像にはチェックを入れてください)</p>
                 <div class="d-flex flex-wrap">
                   <% @illustration.challenged_images.each do |challenged_image| %>
+                    <% next if challenged_image.new_record? %>
                     <div class="mx-2">
                       <%= f.check_box :challenged_image_ids, { multiple: true, class: "mr-3" }, challenged_image.id, false %>
                       <label for="illustration_challenged_image_ids_<%= challenged_image.id %>">
