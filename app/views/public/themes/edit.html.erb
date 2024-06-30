@@ -50,6 +50,7 @@
                 <p class="mt-5 mb-4">投稿済みの画像(削除したい画像にはチェックを入れてください)</p>
                 <div class="d-flex flex-wrap">
                   <% @theme.reference_images.each do |reference_image| %>
+                    <% next if reference_image.new_record? %>
                     <div class="mx-2">
                       <%= f.check_box :reference_image_ids, { multiple: true, class: "mr-3" }, reference_image.id, false %>
                       <label for="theme_reference_image_ids_<%= reference_image.id %>">
