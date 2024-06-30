@@ -34,14 +34,20 @@ class Public::IllustrationsController < ApplicationController
 
   def update
     @illustration = current_end_user.illustrations.find(params[:id])
-    if params[:illustration][:challenged_image_ids]
-      params[:illustration][:challenged_image_ids].each do |challenged_image_id|
-        challenged_image = @illustration.challenged_images.find(challenged_image_id)
-        challenged_image.purge
-      end
-    end
+    # if params[:illustration][:challenged_image_ids]
+    #   params[:illustration][:challenged_image_ids].each do |challenged_image_id|
+    #     challenged_image = @illustration.challenged_images.find(challenged_image_id)
+    #     challenged_image.purge
+    #   end
+    # end
 
     if @illustration.update(illustration_params)
+      if params[:illustration][:challenged_image_ids]
+        params[:illustration][:challenged_image_ids].each do |challenged_image_id|
+          challenged_image = @illustration.challenged_images.find(challenged_image_id)
+          challenged_image.purge
+      end
+    end
       redirect_to illustration_path(@illustration.id)
     else
       render :edit
