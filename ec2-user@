@@ -1,0 +1,7 @@
+DB_USERNAME="root"
+DB_PASSWORD="Aiueo0612"
+DB_HOST="rds-mysql-server.crs6kok6salp.ap-northeast-1.rds.amazonaws.com"
+DB_DATABASE="odabodo"
+
+ADMIN_EMAIL=murata1218aaa@gmail.com
+ADMIN_PASSWORD=Keropi12
