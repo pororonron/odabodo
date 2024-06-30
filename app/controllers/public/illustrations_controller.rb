@@ -34,32 +34,27 @@ class Public::IllustrationsController < ApplicationController
 
   def update
     @illustration = current_end_user.illustrations.find(params[:id])
+    #チェックが入っていて（全部削除）、元々の画像の数と＝になるとき
     if params[:illustration][:challenged_image_ids].present? && ( @illustration.challenged_images.length == params[:illustration][:challenged_image_ids].length )
-      @illustration.update(illustration_params)
-      render :edit
+      if params[:illustration][:challenged_images].blank?
+        @illustration.update(illustration_params)
+        render :edit
       return
-    end
-    if params[:illustration][:challenged_image_ids].present? && params[:illustration][:challenged_images].nil?
-      @illustration.update(illustration_params)
-      render :edit
-      return
-    end
-    if params[:illustration][:challenged_image_ids]
-      params[:illustration][:challenged_image_ids].each do |challenged_image_id|
-        challenged_image = @illustration.challenged_images.find(challenged_image_id)
-        challenged_image.purge if @illustration.challenged_images.length >= 2
       end
     end
 
+    #チェックが入っていて(全部削除ではない)、追加画像がないとき
     if @illustration.update(illustration_params)
-
+      #チェックが入っていて追加画像があるとき
+      if params[:illustration][:challenged_image_ids]
+        params[:illustration][:challenged_image_ids].each do |challenged_image_id|
+          challenged_image = @illustration.challenged_images.find(challenged_image_id)
+          challenged_image.purge
+        end
+      end
       redirect_to illustration_path(@illustration.id)
     else
-      if params[:illustration][:challenged_image_ids].present? && ( @illustration.challenged_images.length > params[:illustration][:challenged_image_ids].length )
-        redirect_to illustration_path(@illustration.id)
-      else
-        render :edit
-      end
+      render :edit
     end
   end
 
