@@ -12,36 +12,62 @@
   </head>
 
   <body class="d-flex flex-column bg-color">
-    <header>
-      <% if admin_signed_in? %>
-        <div>
-          <div>
-            <%= link_to 'お題・イラスト', theme_and_illustration_admin_homes_path, method: :get, class: "btn btn-success mb-3" %>
-            <%= link_to 'コメント', comment_admin_homes_path, method: :get, class: "btn btn-success mb-3" %>
-            <%= link_to 'ユーザー', end_users_admin_homes_path, method: :get, class: "btn btn-success mb-3" %>
-          </div>
+    <% if admin_signed_in? %>
+      <header>
+        <nav class="navbar navbar-expand-lg">
+          <div class="container my-3">
+            <a class="navbar-brand p-3 align-self-center" href="/admin"><%= image_tag('logo_bg_none3.png') %></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+              aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+              <i class="fa-solid fa-bars"></i>
+            </button>
+            <div class="collapse navbar-collapse row justify-content-end" id="navbarNavDropdown">
+              <ul class="navbar-nav ml-auto">
+                <li class="nav-item align-self-center mr-3">
+                  <%= link_to 'お題・イラスト', theme_and_illustration_admin_homes_path, method: :get, class: "btn btn-theme my-3" %>
+                </li>
+                <li class="nav-item align-self-center mr-3">
+                  <%= link_to 'コメント', comment_admin_homes_path, method: :get, class: "btn btn-theme my-3" %>
+                </li>
+                <li class="nav-item align-self-center mr-3">
+                  <%= link_to 'ユーザー', end_users_admin_homes_path, method: :get, class: "btn btn-theme my-3" %>
+                </li>
 
-          <div class="search_form">
-            <%= form_with url: search_admin_homes_path, method: :get, local: true do |f| %>
-              <div class="input-group">
-                <input type="text" id="txt-search" class="form-control input-group-prepend" placeholder="キーワードを入力" name="title">
-                <span class="input-group-btn input-group-append">
-                    <button type="submit" id="btn-search" class="btn btn-secondary">検索</button>
-                </span>
-              </div>
-            <% end %>
-          </div>
 
-          <%= link_to 'ログアウトする', destroy_admin_session_path, method: :delete %>
-        </div>
-      <% end %>
-    </header>
+                  <li class="nav-item align-self-center mr-2 my-3">
+                    <%= form_with url: search_admin_homes_path, method: :get, local: true do |f| %>
+                      <div class="input-group">
+                        <input type="text" id="txt-search" class="form-control input-group-prepend" placeholder="キーワードを入力" name="title">
+                        <span class="input-group-btn input-group-append">
+                            <button type="submit" id="btn-search" class="btn btn-secondary">検索</button>
+                        </span>
+                      </div>
+                    <% end %>
+                  </li>
+
+
+                <li class="nav-item align-self-center mr-2">
+                  <%= link_to 'ログアウトする', destroy_admin_session_path, method: :delete, class: "text-white px-3" %>
+                </li>
+              </ul>
+            </div>
+
+          </div>
+        </nav>
+      </header>
+    <% end %>
     <main>
-      <%= notice %>
-      <%= yield %>
+      <div class="container">
+        <div class="my-3">
+          <%= notice %>
+          <%= yield %>
+        </div>
+      </div>
     </main>
     <footer>
-      <p>© pororonron</p>
+      <div class="text-center my-5">
+        <p>© pororonron</p>
+      </div>
     </footer>
   </body>
 </html>
