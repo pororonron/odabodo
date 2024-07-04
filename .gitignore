@@ -39,4 +39,5 @@
 yarn-debug.log*
 .yarn-integrity
 
-/.envec2-user@
+/.env
+/.ec2-user@
