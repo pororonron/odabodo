@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   before_action :configure_authentication
-  before_action :is_matching_login_end_user, only: [:edit, :update], unless: :admin_controller?
+  before_action :is_matching_login_end_user, only: [:edit, :update,], unless: :admin_controller?
 
   private
 

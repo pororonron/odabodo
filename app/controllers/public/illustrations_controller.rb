@@ -64,15 +64,6 @@ class Public::IllustrationsController < ApplicationController
     redirect_to root_path
   end
 
-  # def challenged_images_resize(params)
-  #   if params[:challenged_images]
-  #     params[:challenged_images].each do |challenged_image|
-  #       challenged_image.tempfile = ImageProcessing::MiniMagick.source(challenged_image.path).resize_to_limit(1000, 1000).call
-  #     end
-  #   end
-  #   params
-  # end
-
   private
 
   def illustration_params
