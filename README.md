@@ -41,7 +41,7 @@ X(旧Twitter)のアカウントで開設できるリクエストボックスの�
 https://docs.google.com/spreadsheets/d/1eo8Z-hLMKgczEKM7bL9hKCSoERIygDkaDR5zYcHAu4Y/edit?usp=sharing
 ​
 ## 開発環境
-- OS：Linux(CentOS)
+- OS：Linux(AmazonLinux2)
 - 言語：HTML,CSS,JavaScript,Ruby,SQL
 - フレームワーク：Ruby on Rails
 - JSライブラリ：jQuery
